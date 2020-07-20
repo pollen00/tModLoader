@@ -2147,6 +2147,19 @@
  
  			new Microsoft.Xna.Framework.Color(150, 150, 150, 150);
  			if (mouseX >= num && (float)mouseX <= (float)num + (float)TextureAssets.InventoryBack.Width() * inventoryScale && mouseY >= num2 && (float)mouseY <= (float)num2 + (float)TextureAssets.InventoryBack.Height() * inventoryScale && !PlayerInput.IgnoreMouseInterface) {
+@@ -31238,7 +_,11 @@
+ 
+ 		public static void CraftItem(Recipe r) {
+ 			int stack = mouseItem.stack;
++			
+-			mouseItem = r.createItem.Clone();
++			mouseItem = r.createItem.DeepClone();
++			mouseItem.modItem = mouseItem.modItem?.NewInstance(mouseItem);
++			mouseItem.globalItems = ItemLoader.InstancedGlobals.Select(g => g.NewInstance(mouseItem)).ToArray();
++			
+ 			mouseItem.stack += stack;
+ 			if (stack <= 0)
+ 				mouseItem.Prefix(-1);
 @@ -31247,8 +_,11 @@
  			mouseItem.position.Y = player[myPlayer].position.Y + (float)(player[myPlayer].height / 2) - (float)(mouseItem.height / 2);
  			PopupText.NewText(PopupTextContext.ItemCraft, mouseItem, r.createItem.stack);

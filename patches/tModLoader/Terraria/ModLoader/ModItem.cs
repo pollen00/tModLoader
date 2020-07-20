@@ -72,7 +72,7 @@ namespace Terraria.ModLoader
 		/// Whether instances of this ModItem are created through Clone or constructor (by default implementations of NewInstance and Clone(Item, Item)). 
 		/// Defaults to false (using default constructor).
 		/// </summary>
-		public virtual bool CloneNewInstances => false;
+		public virtual bool CloneNewInstances => true;
 
 		/// <summary>
 		/// Returns a clone of this ModItem. 
@@ -92,7 +92,11 @@ namespace Terraria.ModLoader
 		/// </summary>
 		/// <param name="item">The item being cloned</param>
 		/// <param name="itemClone">The new item</param>
-		public virtual ModItem Clone(Item item) => NewInstance(item);
+		public virtual ModItem Clone(Item item) {
+			ModItem clone = Clone();
+			clone.item = item;
+			return clone;
+		}
 
 		/// <summary>
 		/// Create a new instance of this ModItem for an Item instance. 
@@ -102,12 +106,10 @@ namespace Terraria.ModLoader
 		/// </summary>
 		public virtual ModItem NewInstance(Item itemClone) {
 			if (CloneNewInstances) {
-				var clone = Clone();
-				clone.item = itemClone;
-				return clone;
+				return Clone(itemClone);
 			}
 
-			var copy = (ModItem)Activator.CreateInstance(GetType());
+			ModItem copy = (ModItem)Activator.CreateInstance(GetType());
 			copy.item = itemClone;
 			copy.Mod = Mod;
 			return copy;
