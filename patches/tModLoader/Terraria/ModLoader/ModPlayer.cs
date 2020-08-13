@@ -39,7 +39,7 @@ namespace Terraria.ModLoader
 		/// </summary>
 		public virtual bool CloneNewInstances => true;
 		
-		internal sealed override void AddInstance() {
+		protected sealed override void Register() {
 			Mod.players[Name] = this;
 			PlayerHooks.Add(this);
 			ContentInstance.Register(this);
@@ -90,11 +90,6 @@ namespace Terraria.ModLoader
 		/// <param name="items"></param>
 		/// <param name="mediumcoreDeath">If true, the inventory is being setup for a character that dies in mediumcore rather than a newly created player.</param>
 		public virtual void SetupStartInventory(IList<Item> items, bool mediumcoreDeath) {
-		}
-
-		// @todo: SetupStartInventory marked obsolete until v0.11
-		[method: Obsolete("SetupStartInventory now has an overload with a mediumcoreDeath bool argument, please use that.")]
-		public virtual void SetupStartInventory(IList<Item> items) {
 		}
 
 		/// <summary>
@@ -430,25 +425,6 @@ namespace Terraria.ModLoader
 		/// <param name="item">The item being used.</param>
 		/// <param name="manaConsumed">The mana consumed from the player.</param>
 		public virtual void OnConsumeMana(Item item, int manaConsumed) {
-		}
-
-		/// <summary>
-		/// Allows you to temporarily modify a weapon's damage based on player buffs, etc. This is useful for creating new classes of damage, or for making subclasses of damage (for example, Shroomite armor set boosts).
-		/// </summary>
-		/// <param name="item"></param>
-		/// <param name="damage"></param>
-		[Obsolete("Use ModifyWeaponDamage", true)]
-		public virtual void GetWeaponDamage(Item item, ref int damage) {
-		}
-
-		/// <summary>
-		/// Allows you to temporarily modify this weapon's damage based on player buffs, etc. This is useful for creating new classes of damage, or for making subclasses of damage (for example, Shroomite armor set boosts).
-		/// </summary>
-		/// <param name="item">The item being used</param>
-		/// <param name="add">Used for additively stacking buffs (most common). Only ever use += on this field.</param>
-		/// <param name="mult">Use to directly multiply the player's effective damage. Good for debuffs, or things which should stack separately (eg ammo type buffs)</param>
-		[Obsolete("Use ModifyWeaponDamage overload with the additional flat parameter")]
-		public virtual void ModifyWeaponDamage(Item item, ref float add, ref float mult) {
 		}
 
 		/// <summary>

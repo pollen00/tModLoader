@@ -105,7 +105,7 @@ namespace Terraria.ModLoader
 			Array.Resize(ref TextureAssets.Npc, nextNPC);
 
 			//Sets
-			LoaderUtils.ReloadSets(typeof(NPCID.Sets));
+			LoaderUtils.ResetStaticMembers(typeof(NPCID), true);
 
 			//Etc
 			Array.Resize(ref Main.townNPCCanSpawn, nextNPC);

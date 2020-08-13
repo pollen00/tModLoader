@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using Terraria.GameContent;
@@ -54,11 +56,16 @@ namespace Terraria.ModLoader
 		public static int GetBossHeadSlot(string texture) => bossHeads.TryGetValue(texture, out int slot) ? slot : -1;
 
 		internal static void ResizeAndFillArrays() {
+			static void ResetHeadRenderer(ref NPCHeadRenderer renderer, Asset<Texture2D>[] textures) {
+				Main.ContentThatNeedsRenderTargets.Remove(renderer);
+				Main.ContentThatNeedsRenderTargets.Add(renderer = new NPCHeadRenderer(textures));
+			}
+
 			//Textures
 			Array.Resize(ref TextureAssets.NpcHead, nextHead);
-			Main.TownNPCHeadRenderer = new NPCHeadRenderer(TextureAssets.NpcHead);
 			Array.Resize(ref TextureAssets.NpcHeadBoss, nextBossHead);
-			Main.BossNPCHeadRenderer = new NPCHeadRenderer(TextureAssets.NpcHeadBoss);
+			ResetHeadRenderer(ref Main.TownNPCHeadRenderer, TextureAssets.NpcHead);
+			ResetHeadRenderer(ref Main.BossNPCHeadRenderer, TextureAssets.NpcHeadBoss);
 
 			foreach (string texture in heads.Keys) {
 				TextureAssets.NpcHead[heads[texture]] = ModContent.GetTexture(texture);
@@ -73,6 +80,10 @@ namespace Terraria.ModLoader
 			foreach (int npc in npcToBossHead.Keys) {
 				NPCID.Sets.BossHeadTextures[npc] = npcToBossHead[npc];
 			}
+
+			//Etc
+
+			Array.Resize(ref Main.instance._npcIndexWhoHoldsHeadIndex, nextHead);
 		}
 
 		internal static void Unload() {

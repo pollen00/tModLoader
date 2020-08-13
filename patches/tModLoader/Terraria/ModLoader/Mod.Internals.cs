@@ -34,8 +34,7 @@ namespace Terraria.ModLoader
 
 		//Entities
 		internal readonly IDictionary<string, Music> musics = new Dictionary<string, Music>();
-		internal readonly IDictionary<string, Effect> effects = new Dictionary<string, Effect>();
-		internal readonly IList<ModRecipe> recipes = new List<ModRecipe>();
+		internal readonly IList<Recipe> recipes = new List<Recipe>();
 		internal readonly IDictionary<string, ModItem> items = new Dictionary<string, ModItem>();
 		internal readonly IDictionary<string, GlobalItem> globalItems = new Dictionary<string, GlobalItem>();
 		internal readonly IDictionary<Tuple<string, EquipType>, EquipTexture> equipTextures = new Dictionary<Tuple<string, EquipType>, EquipTexture>();
@@ -136,8 +135,11 @@ namespace Terraria.ModLoader
 		internal void SetupContent() {
 			foreach (ModItem item in items.Values) {
 				ItemLoader.SetDefaults(item.item, false);
+				
 				item.AutoStaticDefaults();
 				item.SetStaticDefaults();
+
+				ItemID.Search.Add($"{item.Mod.Name}/{item.Name}", item.item.type);
 			}
 
 			foreach (ModPrefix prefix in prefixes.Values) {
@@ -161,6 +163,8 @@ namespace Terraria.ModLoader
 				if (!string.IsNullOrEmpty(tile.chest)) {
 					TileID.Sets.BasicChest[tile.Type] = true;
 				}
+				
+				TileID.Search.Add($"{tile.Mod.Name}/{tile.Name}", tile.Type);
 			}
 
 			foreach (GlobalTile globalTile in globalTiles.Values) {
@@ -171,6 +175,8 @@ namespace Terraria.ModLoader
 				TextureAssets.Wall[wall.Type] = ModContent.GetTexture(wall.Texture);
 
 				wall.SetDefaults();
+				
+				WallID.Search.Add($"{wall.Mod.Name}/{wall.Name}", wall.Type);
 			}
 
 			foreach (GlobalWall globalWall in globalWalls.Values) {
@@ -179,14 +185,19 @@ namespace Terraria.ModLoader
 
 			foreach (ModProjectile projectile in projectiles.Values) {
 				ProjectileLoader.SetDefaults(projectile.projectile, false);
+
 				projectile.AutoStaticDefaults();
 				projectile.SetStaticDefaults();
+				
+				ProjectileID.Search.Add($"{projectile.Mod.Name}/{projectile.Name}", projectile.projectile.type);
 			}
 
 			foreach (ModNPC npc in npcs.Values) {
 				NPCLoader.SetDefaults(npc.npc, false);
 				npc.AutoStaticDefaults();
 				npc.SetStaticDefaults();
+				
+				NPCID.Search.Add($"{npc.Mod.Name}/{npc.Name}", npc.npc.type);
 			}
 
 			foreach (ModMountData modMountData in mountDatas.Values) {
@@ -202,6 +213,8 @@ namespace Terraria.ModLoader
 				TextureAssets.Buff[buff.Type] = ModContent.GetTexture(buff.Texture);
 
 				buff.SetDefaults();
+				
+				BuffID.Search.Add($"{buff.Mod.Name}/{buff.Name}", buff.Type);
 			}
 
 			foreach (ModWaterStyle waterStyle in waterStyles.Values) {
@@ -256,10 +269,6 @@ namespace Terraria.ModLoader
 				{
 					sound.Value.Dispose();
 				}
-				foreach (var effect in effects)
-				{
-					effect.Value.Dispose();
-				}
 				foreach (var texture in textures)
 				{
 					texture.Value.Dispose();
@@ -267,7 +276,6 @@ namespace Terraria.ModLoader
 				*/
 			}
 
-			effects.Clear();
 			musics.Clear();
 
 			Assets.Dispose();
@@ -285,6 +293,7 @@ namespace Terraria.ModLoader
 			IList<Type> modGores = new List<Type>();
 			IList<Type> modSounds = new List<Type>();
 
+
 			Type modType = GetType();
 			foreach (Type type in Code.GetTypes().OrderBy(type => type.FullName, StringComparer.InvariantCulture)) {
 				if (type == modType){continue;}
@@ -298,9 +307,9 @@ namespace Terraria.ModLoader
 					modSounds.Add(type);
 				}
 				else if (typeof(ILoadable).IsAssignableFrom(type)) {
-					bool? autoload = AutoloadAttribute.GetValue(type);
-					if (autoload ?? Properties.Autoload) {
-						AutoloadInstance(type);
+					var autoload = AutoloadAttribute.GetValue(type);
+					if (autoload.NeedsAutoloading) {
+						AddContent((ILoadable)Activator.CreateInstance(type));
 					}
 				}
 			}
@@ -341,7 +350,8 @@ namespace Terraria.ModLoader
 			var delayedLoadTypes = new List<Type> {
 				typeof(Texture2D),
 				typeof(DynamicSpriteFont),
-				typeof(SpriteFont)
+				typeof(SpriteFont),
+				typeof(Effect)
 			};
 
 			SetupAssetRepository(sources, assetReaderCollection, delayedLoadTypes);
@@ -355,12 +365,6 @@ namespace Terraria.ModLoader
 			var assetLoader = new AssetLoader(assetReaderCollection);
 
 			Assets = new ModAssetRepository(assetReaderCollection, assetLoader, asyncAssetLoader, sources.ToArray());
-		}
-
-		private void AutoloadInstance(Type type) {
-			var loadable = (ILoadable)Activator.CreateInstance(type);
-			loadable.Load(this);
-			loadables.Add(loadable);
 		}
 
 		private void AutoloadBackgrounds() {

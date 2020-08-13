@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Terraria.DataStructures;
 using Terraria.ModLoader.IO;
 
@@ -12,8 +14,13 @@ namespace Terraria.ModLoader
 	/// <seealso cref="Terraria.DataStructures.TileEntity" />
 	public abstract class ModTileEntity : TileEntity, IModType
 	{
-		public const int numVanilla = 3;
-		private static int nextTileEntity = numVanilla;
+		public static readonly int NumVanilla = Assembly.GetExecutingAssembly()
+			.GetTypes()
+			.Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(TileEntity)) && !typeof(ModTileEntity).IsAssignableFrom(t))
+			.Count();
+
+		private static int nextTileEntity = NumVanilla;
+
 		internal static readonly List<ModTileEntity> tileEntities = new List<ModTileEntity>();
 		// TODO: public bool netUpdate;
 
@@ -47,11 +54,11 @@ namespace Terraria.ModLoader
 		/// Gets the base ModTileEntity object with the given type.
 		/// </summary>
 		public static ModTileEntity GetTileEntity(int type) {
-			return type >= numVanilla && type < nextTileEntity ? tileEntities[type - numVanilla] : null;
+			return type >= NumVanilla && type < nextTileEntity ? tileEntities[type - NumVanilla] : null;
 		}
 
-		internal static void Unload() {
-			nextTileEntity = numVanilla;
+		internal static void UnloadAll() {
+			nextTileEntity = NumVanilla;
 			tileEntities.Clear();
 		}
 
@@ -61,7 +68,7 @@ namespace Terraria.ModLoader
 		public static int CountInWorld() {
 			int count = 0;
 			foreach (KeyValuePair<int, TileEntity> pair in ByID) {
-				if (pair.Value.type >= numVanilla) {
+				if (pair.Value.type >= NumVanilla) {
 					count++;
 				}
 			}
@@ -182,9 +189,8 @@ namespace Terraria.ModLoader
 			NetReceive(reader, networkSend);
 		}
 
-		void ILoadable.Load(Mod mod) {
+		public virtual void Load(Mod mod) {
 			Mod = mod;
-			Load();
 
 			if (!Mod.loading)
 				throw new Exception("AddTileEntity can only be called from Mod.Load or Mod.Autoload");
@@ -198,8 +204,7 @@ namespace Terraria.ModLoader
 			ContentInstance.Register(this);
 		}
 
-		public virtual void Load() {}
-		void ILoadable.Unload(){}
+		public virtual void Unload(){}
 
 		/// <summary>
 		/// Allows you to save custom data for this tile entity.
