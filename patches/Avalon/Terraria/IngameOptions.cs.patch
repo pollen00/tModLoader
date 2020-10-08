@@ -1,0 +1,27 @@
+--- src/Terraria/Terraria/IngameOptions.cs
++++ src/Avalon/Terraria/IngameOptions.cs
+@@ -1251,10 +_,8 @@
+ 				color = Color.Gold;
+ 
+ 			Vector2 vector = Utils.DrawBorderStringBig(sb, txt, anchor + offset * (1 + i), color, scales[i], 0.5f, 0.5f);
+-			if (new Rectangle((int)anchor.X - (int)vector.X / 2, (int)anchor.Y + (int)(offset.Y * (float)(1 + i)) - (int)vector.Y / 2, (int)vector.X, (int)vector.Y).Contains(new Point(Main.mouseX, Main.mouseY)))
+-				return true;
+-
+-			return false;
++			
++			return new Rectangle((int)anchor.X - (int)vector.X / 2, (int)anchor.Y + (int)(offset.Y * (float)(1 + i)) - (int)vector.Y / 2, (int)vector.X, (int)vector.Y).Contains(new Point(Main.mouseX, Main.mouseY));
+ 		}
+ 
+ 		public static bool DrawRightSide(SpriteBatch sb, string txt, int i, Vector2 anchor, Vector2 offset, float scale, float colorScale, Color over = default(Color)) {
+@@ -1264,10 +_,8 @@
+ 
+ 			Vector2 value = Utils.DrawBorderString(sb, txt, anchor + offset * (1 + i), color, scale, 0.5f, 0.5f);
+ 			valuePosition = anchor + offset * (1 + i) + value * new Vector2(0.5f, 0f);
+-			if (new Rectangle((int)anchor.X - (int)value.X / 2, (int)anchor.Y + (int)(offset.Y * (float)(1 + i)) - (int)value.Y / 2, (int)value.X, (int)value.Y).Contains(new Point(Main.mouseX, Main.mouseY)))
+-				return true;
+ 
+-			return false;
++            return new Rectangle((int)anchor.X - (int)value.X / 2, (int)anchor.Y + (int)(offset.Y * (float)(1 + i)) - (int)value.Y / 2, (int)value.X, (int)value.Y).Contains(new Point(Main.mouseX, Main.mouseY));
+ 		}
+ 
+ 		public static Rectangle GetExpectedRectangleForNotification(int itemIndex, Vector2 anchor, Vector2 offset, int areaWidth) => Utils.CenteredRectangle(anchor + offset * (1 + itemIndex), new Vector2(areaWidth, offset.Y - 4f));

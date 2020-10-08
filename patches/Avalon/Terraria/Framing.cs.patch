@@ -1,0 +1,37 @@
+--- src/Terraria/Terraria/Framing.cs
++++ src/Avalon/Terraria/Framing.cs
+@@ -125,24 +_,25 @@
+ 				}
+ 			};
+ 
+-			centerWallFrameLookup = new int[3][] {
+-				new int[3] {
++			int[][] array = new int[3][];
++			int num = 0;
++			array[num] = new int[3] {
+ 					2,
+ 					0,
+ 					0
+-				},
+-				new int[3] {
++				};
++			array[1] = new int[3] {
+ 					0,
+ 					1,
+ 					4
+-				},
+-				new int[3] {
++				};
++			int num2 = 2;
++			array[num2] = new int[3] {
+ 					0,
+ 					3,
+ 					0
+-				}
+-			};
+-
++				};
++            centerWallFrameLookup = array;
+ 			wallFrameLookup = new Point16[20][];
+ 			wallFrameSize = new Point16(36, 36);
+ 			AddWallFrameLookup(0, 9, 3, 10, 3, 11, 3, 6, 6);

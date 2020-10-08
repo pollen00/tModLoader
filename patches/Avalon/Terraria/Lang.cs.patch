@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/Lang.cs
++++ src/Avalon/Terraria/Lang.cs
+@@ -28,7 +_,7 @@
+ 		[Obsolete("Lang arrays have been replaced with the new Language.GetText system.")]
+ 		public static LocalizedText[] mp = new LocalizedText[23];
+ 		[Obsolete("Lang arrays have been replaced with the new Language.GetText system.")]
+-		public static LocalizedText[] chestType = new LocalizedText[52];
++		public static LocalizedText[] chestType = new LocalizedText[Main.maxChests];
+ 		[Obsolete("Lang arrays have been replaced with the new Language.GetText system.")]
+ 		public static LocalizedText[] dresserType = new LocalizedText[40];
+ 		[Obsolete("Lang arrays have been replaced with the new Language.GetText system.")]
