@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/ID/ItemID.cs
 +++ src/Avalon/Terraria/ID/ItemID.cs
+@@ -35,7 +_,7 @@
+ 
+ 		public class Sets
+ 		{
+-			public static SetFactory Factory = new SetFactory(5045);
++			public static SetFactory Factory = new SetFactory(Count);
+ 			public static List<int> ItemsThatAreProcessedAfterNormalContentSample = new List<int> {
+ 				1533,
+ 				1534,
 @@ -938,12 +_,6 @@
  
  		private static Dictionary<string, short> _legacyItemLookup;
