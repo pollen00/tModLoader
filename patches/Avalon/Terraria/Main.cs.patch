@@ -1,0 +1,22 @@
+--- src/Terraria/Terraria/Main.cs
++++ src/Avalon/Terraria/Main.cs
+@@ -38852,10 +_,16 @@
+ 					if (num107 == 3)
+ 						num109 = 2;
+ 
+-					Vector2 origin2 = FontAssets.MouseText.Value.MeasureString(versionNumber);
++					string avalonVersion = "Exxo Avalon: Origins v1.0.0.0";
++
++					Vector2 origin2 = FontAssets.MouseText.Value.MeasureString("Terraria " + versionNumber);
+ 					origin2.X *= 0.5f;
++					spriteBatch.DrawString(FontAssets.MouseText.Value, "Terraria " + versionNumber, new Vector2(origin2.X + (float)num108 + 10f, (float)screenHeight - origin2.Y + (float)num109 - 2f), color12, 0f, origin2, 1f, SpriteEffects.None, 0f);
++
++					Vector2 origin3 = FontAssets.MouseText.Value.MeasureString(avalonVersion);
++					origin3.X *= 0.5f;
+-					origin2.Y *= 0.5f;
++					origin3.Y *= 0.5f;
+-					spriteBatch.DrawString(FontAssets.MouseText.Value, versionNumber, new Vector2(origin2.X + (float)num108 + 10f, (float)screenHeight - origin2.Y + (float)num109 - 2f), color12, 0f, origin2, 1f, SpriteEffects.None, 0f);
++					spriteBatch.DrawString(FontAssets.MouseText.Value, avalonVersion, new Vector2(origin3.X + (float)num108 + 10f, (float)screenHeight - origin3.Y + (float)num109 - 2f), color12, 0f, origin3, 1f, SpriteEffects.None, 0f);
+ 				}
+ 			}
+ 
