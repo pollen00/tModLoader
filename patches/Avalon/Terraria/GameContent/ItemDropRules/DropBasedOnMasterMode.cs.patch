@@ -1,0 +1,20 @@
+--- src/Terraria/Terraria/GameContent/ItemDropRules/DropBasedOnMasterMode.cs
++++ src/Avalon/Terraria/GameContent/ItemDropRules/DropBasedOnMasterMode.cs
+@@ -19,7 +_,7 @@
+ 		}
+ 
+ 		public bool CanDrop(DropAttemptInfo info) {
+-			if (info.IsMasterMode)
++			if (info.IsMasterMode || info.IsExpertMode)
+ 				return _ruleForMasterMode.CanDrop(info);
+ 
+ 			return _ruleForDefault.CanDrop(info);
+@@ -32,7 +_,7 @@
+ 		}
+ 
+ 		public ItemDropAttemptResult TryDroppingItem(DropAttemptInfo info, ItemDropRuleResolveAction resolveAction) {
+-			if (info.IsMasterMode)
++			if (info.IsMasterMode || info.IsExpertMode)
+ 				return resolveAction(_ruleForMasterMode, info);
+ 
+ 			return resolveAction(_ruleForDefault, info);
