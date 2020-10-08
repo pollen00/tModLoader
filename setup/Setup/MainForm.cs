@@ -26,10 +26,12 @@ namespace Terraria.ModLoader.Setup
 			taskButtons[buttonPatchTerraria] = () => new PatchTask(this, "src/decompiled", "src/Terraria", "patches/Terraria", new ProgramSetting<DateTime>("TerrariaDiffCutoff"));
 			taskButtons[buttonDiffModLoader] = () => new DiffTask(this, "src/Terraria", "src/tModLoader", "patches/tModLoader", new ProgramSetting<DateTime>("tModLoaderDiffCutoff"));
 			taskButtons[buttonPatchModLoader] = () => new PatchTask(this, "src/Terraria", "src/tModLoader", "patches/tModLoader", new ProgramSetting<DateTime>("tModLoaderDiffCutoff"));
+			taskButtons[buttonDiffAvalon] = () => new DiffTask(this, "src/Terraria", "src/Avalon", "patches/Avalon", new ProgramSetting<DateTime>("AvalonDiffCutoff"));
+			taskButtons[buttonPatchAvalon] = () => new PatchTask(this, "src/Terraria", "src/Avalon", "patches/Avalon", new ProgramSetting<DateTime>("AvalonDiffCutoff"));
 			taskButtons[buttonSetupDebugging] = () => new SetupDebugTask(this);
 
 			taskButtons[buttonRegenSource] = () =>
-				new RegenSourceTask(this, new[] { buttonPatchTerraria, buttonPatchModLoader, buttonSetupDebugging }
+				new RegenSourceTask(this, new[] { buttonPatchTerraria, /*buttonPatchModLoader,*/ buttonPatchAvalon, buttonSetupDebugging }
 					.Select(b => taskButtons[b]()).ToArray());
 
 			taskButtons[buttonSetup] = () =>
@@ -90,6 +92,7 @@ namespace Terraria.ModLoader.Setup
 		{
 			Settings.Default.TerrariaDiffCutoff = new DateTime(2015, 1, 1);
 			Settings.Default.tModLoaderDiffCutoff = new DateTime(2015, 1, 1);
+            Settings.Default.AvalonDiffCutoff = new DateTime(2020, 10, 7);
 			Settings.Default.Save();
 		}
 

@@ -59,9 +59,21 @@ namespace Terraria.ModLoader.Properties {
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2020-10-07")]
+        public global::System.DateTime AvalonDiffCutoff {
+            get {
+                return ((global::System.DateTime)(this["AvalonDiffCutoff"]));
+            }
+            set {
+                this["AvalonDiffCutoff"] = value;
+            }
+        }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.4.0.3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.4.0.5")]
         public string ClientVersion {
             get {
                 return ((string)(this["ClientVersion"]));
@@ -70,7 +82,7 @@ namespace Terraria.ModLoader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.4.0.3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.4.0.5")]
         public string ServerVersion {
             get {
                 return ((string)(this["ServerVersion"]));
@@ -103,7 +115,7 @@ namespace Terraria.ModLoader.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("17c42ca2c951a7a8a53ddf3a0ca00290")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6b85b2a8ea384384c1090d784f3fcff6")]
         public string SteamClientWinMD5 {
             get {
                 return ((string)(this["SteamClientWinMD5"]));
