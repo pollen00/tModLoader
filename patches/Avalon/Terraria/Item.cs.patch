@@ -1,5 +1,21 @@
 --- src/Terraria/Terraria/Item.cs
 +++ src/Avalon/Terraria/Item.cs
+@@ -168,14 +_,7 @@
+ 			}
+ 		}
+ 
+-		public bool FitsAccessoryVanitySlot {
+-			get {
+-				if (!canBePlacedInVanityRegardlessOfConditions && handOnSlot == -1 && handOffSlot == -1 && backSlot == -1 && frontSlot == -1 && shoeSlot == -1 && waistSlot == -1 && wingSlot == -1 && shieldSlot == -1 && neckSlot == -1 && faceSlot == -1)
+-					return balloonSlot != -1;
+-
+-				return true;
+-			}
+-		}
++		public bool FitsAccessoryVanitySlot => true;
+ 
+ 		public int OriginalRarity => ContentSamples.ItemsByType[type].rare;
+ 
 @@ -1077,8 +_,8 @@
  				if (rare < -1)
  					rare = -1;

@@ -159,6 +159,19 @@
  					}
  					else if (array2[k]) {
  						black = (array3[k] ? new Microsoft.Xna.Framework.Color((byte)(190f * num4), (byte)(120f * num4), (byte)(120f * num4), a) : new Microsoft.Xna.Framework.Color((byte)(120f * num4), (byte)(190f * num4), (byte)(120f * num4), a));
+@@ -15233,10 +_,10 @@
+ 					numLines++;
+ 				}
+ 
+-				if (!item.vanity && item.FitsAccessoryVanitySlot) {
++				/*if (!item.vanity && item.FitsAccessoryVanitySlot) {
+ 					toolTipLine[numLines] = Language.GetText("Misc.CanBePlacedInVanity").Value;
+ 					numLines++;
+-				}
++				}*/
+ 
+ 				if (item.defense > 0) {
+ 					toolTipLine[numLines] = item.defense + Lang.tip[25].Value;
 @@ -15583,7 +_,7 @@
  			}
  
