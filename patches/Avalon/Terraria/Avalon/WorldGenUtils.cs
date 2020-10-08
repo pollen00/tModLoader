@@ -59,7 +59,6 @@ namespace Terraria.Avalon
 		public static bool KillChestAndItems(int x, int y) {
 			for (int i = 0; i < 1000; i++) {
 				Chest chest = Main.chest[i];
-				]
 				if (chest != null && chest.x == x && chest.y == y) {
 					chest = null;
 
