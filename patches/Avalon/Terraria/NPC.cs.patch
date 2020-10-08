@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/NPC.cs
 +++ src/Avalon/Terraria/NPC.cs
+@@ -24,7 +_,7 @@
+ 
+ namespace Terraria
+ {
+-	public class NPC : Entity
++	public partial class NPC : Entity
+ 	{
+ 		private const int NPC_TARGETS_START = 300;
+ 		public bool IsABestiaryIconDummy;
 @@ -110,7 +_,7 @@
  		public const int maxBuffs = 5;
  		public int[] buffType = new int[5];
@@ -36,6 +45,38 @@
  					buffImmune[num4] = true;
  				}
  			}
+@@ -57383,6 +_,7 @@
+ 				}
+ 
+ 				SetEventFlagCleared(ref downedGolemBoss, 6);
++                downedGolemSinceCultistsKilled = true;
+ 			}
+ 
+ 			if (type == 471 && (Main.expertMode || player.RollLuck(2) == 0)) {
+@@ -58500,6 +_,7 @@
+ 
+ 				Item.NewItem((int)position.X, (int)position.Y, width, height, 3549, 1, noBroadcast: false, -1);
+ 				WorldGen.TriggerLunarApocalypse();
++                downedGolemSinceCultistsKilled = false;
+ 			}
+ 
+ 			if (type == 398) {
+@@ -59495,6 +_,7 @@
+ 					break;
+ 				case 245:
+ 					SetEventFlagCleared(ref downedGolemBoss, 6);
++					downedGolemSinceCultistsKilled = true;
+ 					break;
+ 				case 370:
+ 					SetEventFlagCleared(ref downedFishron, 7);
+@@ -59532,6 +_,7 @@
+ 				case 439:
+ 					SetEventFlagCleared(ref downedAncientCultist, 9);
+ 					WorldGen.TriggerLunarApocalypse();
++					downedGolemSinceCultistsKilled = false;
+ 					break;
+ 				case 398:
+ 					SetEventFlagCleared(ref downedMoonlord, 10);
 @@ -71263,7 +_,7 @@
  		}
  

@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/MessageBuffer.cs
++++ src/Avalon/Terraria/MessageBuffer.cs
+@@ -546,6 +_,8 @@
+ 						NPC.downedEmpressOfLight = bitsByte22[5];
+ 						NPC.downedQueenSlime = bitsByte22[6];
+ 						Main.getGoodWorld = bitsByte22[7];
++						BitsByte bitsByte23 = reader.ReadByte();
++						NPC.downedGolemSinceCultistsKilled = bitsByte23[0];
+ 						WorldGen.SavedOreTiers.Copper = reader.ReadInt16();
+ 						WorldGen.SavedOreTiers.Iron = reader.ReadInt16();
+ 						WorldGen.SavedOreTiers.Silver = reader.ReadInt16();
