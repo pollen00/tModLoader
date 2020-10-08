@@ -1,0 +1,18 @@
+--- src/Terraria/Terraria/DataStructures/NPCStrengthHelper.cs
++++ src/Avalon/Terraria/DataStructures/NPCStrengthHelper.cs
+@@ -14,14 +_,7 @@
+ 			}
+ 		}
+ 
+-		public bool IsMasterMode {
+-			get {
+-				if (!(_strength >= 3f))
+-					return _gameModeData.IsMasterMode;
+-
+-				return true;
+-			}
+-		}
++		public bool IsMasterMode => false;
+ 
+ 		public NPCStrengthHelper(GameModeData data, float strength) {
+ 			_strength = strength;

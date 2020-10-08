@@ -1,0 +1,13 @@
+--- src/Terraria/Terraria/GameContent/ItemDropRules/Conditions.cs
++++ src/Avalon/Terraria/GameContent/ItemDropRules/Conditions.cs
+@@ -287,8 +_,8 @@
+ 
+ 		public class IsMasterMode : IItemDropRuleCondition, IProvideItemConditionDescription
+ 		{
+-			public bool CanDrop(DropAttemptInfo info) => Main.masterMode;
+-			public bool CanShowItemDropInUI() => Main.masterMode;
++			public bool CanDrop(DropAttemptInfo info) => Main.expertMode; //Main.masterMode;
++			public bool CanShowItemDropInUI() => Main.expertMode; //Main.masterMode;
+ 			public string GetConditionDescription() => Language.GetTextValue("Bestiary_ItemDropConditions.IsMasterMode");
+ 		}
+ 

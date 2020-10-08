@@ -1,0 +1,57 @@
+--- src/Terraria/Terraria/ID/BuffID.cs
++++ src/Avalon/Terraria/ID/BuffID.cs
+@@ -10,7 +_,7 @@
+ 				public bool faceLeft;
+ 			}
+ 
+-			public static SetFactory Factory = new SetFactory(323);
++			public static SetFactory Factory = new SetFactory(Count);
+ 			public static bool[] IsWellFed = Factory.CreateBoolSet(26, 206, 207);
+ 			public static bool[] TimeLeftDoesNotDecrease = Factory.CreateBoolSet(28);
+ 			public static bool[] CanBeRemovedByNetMessage = Factory.CreateBoolSet(313);
+@@ -591,6 +_,44 @@
+ 		public const int GelBalloonBuff = 320;
+ 		public const int BrainOfConfusionBuff = 321;
+ 		public const int EmpressBlade = 322;
+-		public const int Count = 323;
++		public const int CrimsonDrain = 323;
++		public const int Shockwave = 324;
++		public const int Delirium = 325;
++		public const int Freeze = 326;
++		public const int Luck = 327;
++		public const int BloodCast = 328;
++		public const int Starbright = 329;
++		public const int Vision = 330;
++		public const int DarkInferno = 331;
++		public const int FracturingArmor = 332;
++		public const int Strong = 333;
++		public const int GPS = 334;
++		public const int PrimeArms = 335;
++		public const int TimeShift = 336;
++		public const int IceGolem = 337;
++		public const int Hungry = 338;
++		public const int Electrified2 = 339;
++		public const int Gastropod = 340;
++		public const int Blah = 341;
++		public const int Shadows = 342;
++		public const int Rogue = 343;
++		public const int Gauntlet = 344;
++		public const int Wisdom = 345;
++		public const int Invincibility = 346;
++		public const int InvincibilityCooldown = 347;
++		public const int Titanskin = 348;
++		public const int Inferno2 = 349;
++		public const int BeeSweet = 350;
++		public const int ForceField = 351;
++		public const int Infected = 352;
++		public const int Miniweapon = 353;
++		public const int WeaponImbuePathogen = 354;
++		public const int BrokenWeaponry = 355;
++		public const int Unloaded = 356;
++		public const int BlackHoleSuck = 357;
++		public const int Electrified3 = 358;
++		public const int ReflectorMinion = 359;
++		public const int ShadowCurse = 360;
++		public const int Count = 361;
+ 	}
+ }

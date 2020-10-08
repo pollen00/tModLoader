@@ -1,0 +1,20 @@
+--- src/Terraria/Terraria/Player.cs
++++ src/Avalon/Terraria/Player.cs
+@@ -686,7 +_,7 @@
+ 		public const int maxBuffs = 22;
+ 		public int[] buffType = new int[22];
+ 		public int[] buffTime = new int[22];
+-		public bool[] buffImmune = new bool[323];
++		public bool[] buffImmune = new bool[Main.maxBuffTypes];
+ 		public int heldProj = -1;
+ 		public int breathCD;
+ 		public int breathMax = 200;
+@@ -17379,7 +_,7 @@
+ 					AddBuff(194, 2, quiet: false);
+ 			}
+ 
+-			for (int num26 = 0; num26 < 323; num26++) {
++			for (int num26 = 0; num26 < Main.maxBuffTypes; num26++) {
+ 				buffImmune[num26] = false;
+ 			}
+ 
