@@ -1,0 +1,26 @@
+--- src/Terraria/Terraria/PopupText.cs
++++ src/Avalon/Terraria/PopupText.cs
+@@ -195,8 +_,6 @@
+ 					Main.popupText[num2].color = new Color(255, 150, 150);
+ 				else if (newItem.rare == 5)
+ 					Main.popupText[num2].color = new Color(255, 150, 255);
+-				else if (newItem.rare == -13)
+-					Main.popupText[num2].master = true;
+ 				else if (newItem.rare == -11)
+ 					Main.popupText[num2].color = new Color(255, 175, 0);
+ 				else if (newItem.rare == -1)
+@@ -211,10 +_,12 @@
+ 					Main.popupText[num2].color = new Color(5, 200, 255);
+ 				else if (newItem.rare == 10)
+ 					Main.popupText[num2].color = new Color(255, 40, 100);
+-				else if (newItem.rare >= 11)
++				else if (newItem.rare == 11)
+ 					Main.popupText[num2].color = new Color(180, 40, 255);
++				else if (newItem.rare >= 12)
++					Main.popupText[num2].expert = true;
+ 
+-				Main.popupText[num2].expert = newItem.expert;
++				Main.popupText[num2].master = newItem.expert || newItem.rare == -13;
+ 				Main.popupText[num2].name = newItem.AffixName();
+ 				Main.popupText[num2].stack = stack;
+ 				Main.popupText[num2].velocity.Y = -7f;

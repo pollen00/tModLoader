@@ -1,0 +1,13 @@
+--- src/Terraria/Terraria/Item.cs
++++ src/Avalon/Terraria/Item.cs
+@@ -1077,8 +_,8 @@
+ 				if (rare < -1)
+ 					rare = -1;
+ 
+-				if (rare > 11)
++				if (rare > 12)
+-					rare = 11;
++					rare = 12;
+ 			}
+ 
+ 			num14 *= num14;
