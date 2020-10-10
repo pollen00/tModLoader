@@ -952,7 +952,7 @@
 +		public const short Quack = 5508;
 +		public const short BlahPotion = 5509;
 +		public const short SantasBeard = 5510;
-+		public const short CandyCane5511 = 215;
++		public const short CandyCaneII = 5511;
 +		public const short ChocolateCandyCaneBlock = 5512;
 +		public const short ChocolateCandyCaneWall = 5513;
 +		public const short RedPresent = 5514;
@@ -981,7 +981,7 @@
 +		public const short VorazylcumLeggings = 5537;
 +		public const short BlahsHeadguard = 5538;
 +		public const short BlahsHauberk = 5539;
-+		public const short BlahsCuisses5540 = 244;
++		public const short BlahsCuissesII = 5540;
 +		public const short Kunzite = 5541;
 +		public const short BlahsPicksawTierII = 5542;
 +		public const short UnvolanditeAnvil = 5543;
