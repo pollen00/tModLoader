@@ -1,0 +1,70 @@
+--- src/Terraria/Terraria/ID/WallID.cs
++++ src/Avalon/Terraria/ID/WallID.cs
+@@ -17,7 +_,7 @@
+ 				public static bool[] NewWall4 = Factory.CreateBoolSet(191, 195, 203, 207, 215, 279, 283, 291, 295, 303);
+ 			}
+ 
+-			public static SetFactory Factory = new SetFactory(316);
++			public static SetFactory Factory = new SetFactory(468);
+ 			public static bool[] CanBeConvertedToGlowingMushroom = Factory.CreateBoolSet(64, 67, 15, 247);
+ 			public static bool[] Transparent = Factory.CreateBoolSet(88, 89, 90, 91, 92, 241);
+ 			public static bool[] Corrupt = Factory.CreateBoolSet(69, 217, 220, 3);
+@@ -342,6 +_,57 @@
+ 		public const ushort LargeBambooBlockWall = 313;
+ 		public const ushort AmberStoneWallEcho = 314;
+ 		public const ushort BambooFence = 315;
+-		public const ushort Count = 316;
++		public const ushort OrangeBrickUnsafe = 316;
++		public const ushort OrangeSlabUnsafe = 317;
++		public const ushort OrangeTiledUnsafe = 318;
++		public const ushort OrangeBrickWall = 319;
++		public const ushort OrangeSlabWall = 320;
++		public const ushort OrangeTiledWall = 321;
++		public const ushort HeartstoneBrick = 322;
++		public const ushort ObsidianLavaTube = 323;
++		public const ushort ChlorophyteBrickTwo = 324;
++		public const ushort DarkMatterSlimeBlock = 325;
++		public const ushort BlueLihzahrdBrick = 326;
++		public const ushort TPBlueLihzahrdBrick = 327;
++		public const ushort Vertebrae = 328;
++		public const ushort ChocolateCandyCaneBlock = 329;
++		public const ushort RhodiumBrickWall = 330;
++		public const ushort OsmiumBrickWall = 331;
++		public const ushort ChunkstoneWall = 332;
++		public const ushort ContagionGrassWall = 333;
++		public const ushort LeadBrickWall = 334;
++		public const ushort IronBrickWall = 335;
++		public const ushort FeroziumBrickWall = 336;
++		public const ushort PyroscoricBrickWall = 337;
++		public const ushort DurataniumBrickWall = 338;
++		public const ushort NaquadahBrickWall = 339;
++		public const ushort TroxiniumBrickWall = 340;
++		public const ushort AmethystGemWall = 341;
++		public const ushort TopazGemWall = 342;
++		public const ushort SapphireGemWall = 343;
++		public const ushort EmeraldGemWall = 344;
++		public const ushort RubyGemWall = 345;
++		public const ushort DiamondGemWall = 346;
++		public const ushort ImperviousBrickWall = 348;
++		public const ushort RedVelvetCandyCaneWall = 449;
++		public const ushort MintChocolateCandyCaneWall = 450;
++		public const ushort RainbowCandyCaneWall = 451;
++		public const ushort DarkMatterWoodWall = 452;
++		public const ushort PlasticBrickWall = 453;
++		public const ushort PurpleBrickWallUnsafe = 454;
++		public const ushort PurpleSlabWallUnsafe = 455;
++		public const ushort PurpleTiledWallUnsafe = 456;
++		public const ushort PurpleBrickWall = 457;
++		public const ushort PurpleSlabWall = 458;
++		public const ushort PurpleTiledWall = 459;
++		public const ushort EctoplasmWall = 460;
++		public const ushort OblivionBrickWall = 461;
++		public const ushort ImperviousBrickUnsafe = 462;
++		public const ushort TropicalMudWall = 463;
++		public const ushort TropicsGrassWall = 464;
++		public const ushort TuhrtlBrickWallUnsafe = 465;
++		public const ushort TuhrtlBrickWallSafe = 466;
++		public const ushort NestBlockWall = 467;
++		public const ushort Count = 468;
+ 	}
+ }
