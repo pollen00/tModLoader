@@ -1,0 +1,54 @@
+--- src/Terraria/Terraria/ID/PrefixID.cs
++++ src/Avalon/Terraria/ID/PrefixID.cs
+@@ -86,6 +_,50 @@
+ 		public const int Unreal = 82;
+ 		public const int Mythical = 83;
+ 		public const int Legendary2 = 84;
+-		public const int Count = 85;
++		public const short Vigorous = 85;
++		public const short Robust = 86;
++		public const short Enchanted = 87;
++		public const short Bogus = 88;
++		public const short Magical = 89;
++		public const short Lurid = 90;
++		public const short Fantastic = 91;
++		public const short Awestruck = 92;
++		public const short Phantasmal = 93;
++		public const short Loaded = 94;
++		public const short Barbaric = 95;
++		public const short Busted = 96;
++		public const short Boosted = 97;
++		public const short Disgusting = 98;
++		public const short Protective = 99;
++		public const short Messy = 100;
++		public const short Glorious = 101;
++		public const short Overactive = 102;
++		public const short Mythic = 103;
++		public const short Fluidic = 104;
++		public const short Silly = 105;
++		public const short Handy = 106;
++		public const short Insane = 107;
++		public const short Automated = 108;
++		public const short Drunken = 109;
++		public const short Energized = 110;
++		public const short Excited = 111;
++		public const short Gilded = 112;
++		public const short Hectic = 113;
++		public const short Horrific = 114;
++		public const short Marvelous = 115;
++		public const short Needled = 116;
++		public const short Perfect = 117;
++		public const short Stupid = 118;
++		public const short Woozy = 119;
++		public const short Dismal = 120;
++		public const short Slimy = 121;
++		public const short Colossal = 122;
++		public const short Confused = 123;
++		public const short Languid = 124;
++		public const short Timid = 125;
++		public const short Bloated = 126;
++		public const short Epic = 127;
++		public const short Trolling = 128;
++		public const short Count = 129;
+ 	}
+ }
