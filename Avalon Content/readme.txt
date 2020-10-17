@@ -1,0 +1,1 @@
+This folder only contains the content (e.g. sprites, sound, etc.) relating specifically to Avalon. For intructions on how to properly install Avalon + Avalon's content folder, please view the installation guide on GitHub or Discord.
