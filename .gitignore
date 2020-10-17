@@ -8,6 +8,8 @@
 *.suo
 *.cache
 *.force
+*.xap
+*.xgs
 installer2/*.class
 installer2/*.jar
 solutions/ReleaseExtras/JourneysEndCompatibilityContent/Images

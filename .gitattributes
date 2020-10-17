@@ -1,3 +1,4 @@
 solutions/ReleaseExtras/Terraria text eol=lf
 solutions/ReleaseExtras/tModLoader-mono text eol=lf
 solutions/ReleaseExtras/tModLoader-kick text eol=lf
+*.xwb filter=lfs diff=lfs merge=lfs -text

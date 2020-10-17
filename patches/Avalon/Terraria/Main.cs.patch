@@ -1,23 +1,187 @@
 --- src/Terraria/Terraria/Main.cs
 +++ src/Avalon/Terraria/Main.cs
+@@ -88,24 +_,21 @@
+ 	{
+ 		public delegate void OnPlayerSelected(PlayerFileData player);
+ 
+-		public static class CurrentFrameFlags
++		public static class CurrentFrameFlags {
+-		{
+ 			public static int ActivePlayersCount;
+ 			public static int SleepingPlayersCount;
+ 			public static bool AnyActiveBossNPC;
+ 			public static bool HadAnActiveInteractibleProjectile;
+ 		}
+ 
+-		public enum WorldPreparationState
+-		{
++		public enum WorldPreparationState {
+ 			AwaitingData,
+ 			ProcessingData,
+ 			Ready
+ 		}
+ 
+ #if WINDOWS
+-		internal static class NativeMethods
++		internal static class NativeMethods {
+-		{
+ 			public const uint ES_CONTINUOUS = 2147483648u;
+ 			public const uint ES_SYSTEM_REQUIRED = 1u;
+ 
+@@ -114,8 +_,7 @@
+ 		}
+ #endif
+ 
+-		private struct MouseTextCache
+-		{
++		private struct MouseTextCache {
+ 			public bool noOverride;
+ 			public bool isValid;
+ 			public string cursorText;
+@@ -128,8 +_,7 @@
+ 			public string buffTooltip;
+ 		}
+ 
+-		protected class TextDisplayCache
+-		{
++		protected class TextDisplayCache {
+ 			private string _originalText;
+ 			private int _lastScreenWidth;
+ 			private int _lastScreenHeight;
+@@ -155,16 +_,14 @@
+ 			}
+ 		}
+ 
+-		public struct SceneArea
+-		{
++		public struct SceneArea {
+ 			public Vector2 SceneLocalScreenPositionOffset;
+ 			public float totalWidth;
+ 			public float totalHeight;
+ 			public int bgTopY;
+ 		}
+ 
+-		public struct InfoToSetBackColor
+-		{
++		public struct InfoToSetBackColor {
+ 			public bool isInGameMenuOrIsServer;
+ 			public float CorruptionBiomeInfluence;
+ 			public float CrimsonBiomeInfluence;
+@@ -176,9 +_,34 @@
+ 		}
+ 
+ 		private const string versionStringBecauseTheyreTheSame = "v1.4.0.5";
+-		public const int curRelease = 230;
++		public const int curRelease = 232; //TODO: Increment this whenever data is saved to the world or the player
++		public static bool[] mouseJukeboxButton = new bool[98];
++		public static int jukeBox2 = -1;
++		public static float[] jukeScale = new float[98];
++		public static bool jukebox = false;
++		public static bool subInterface = false;
++		public static Dictionary<string, bool> jukeboxActive = new Dictionary<string, bool>();
++		public static Dictionary<string, int> jukeTune = new Dictionary<string, int>();
++		public static int hoveredJukeboxButton;
++		public static Vector2 pTP = new Vector2(-1f, -1f);
++		public static bool godMode = false;
+ 		public const string assemblyVersionNumber = "1.4.0.5";
+ 		public const string copyrightText = "Copyright © 2020 Re-Logic";
++		public static bool easyPlace = false;
++		public static bool easyPlace2 = false;
++		public static bool noNPCSpawns = false;
++		public static bool lightTiles = false;
++		public static bool grabSun = false;
++		public static bool showTeams = false;
++		public static bool blah = false;
++		public static bool explosivesAllowed = true;
++		public static bool specialWorldGen = false;
++		public static float[] lightTimer = new float[10];
++		public static int dungeonEx = 0;
++		public static int jungleEx = 0;
++		public static Vector2 LoK = Vector2.Zero;
++		public static float[] armaShake = new float[4];
++		public static bool armaRO = false;
+ 		public const ulong WorldGeneratorVersion = 987842478081uL;
+ 		public static Dictionary<string, MinimapFrame> MinimapFrames = new Dictionary<string, MinimapFrame>();
+ 		public static MinimapFrame ActiveMinimapFrame;
+@@ -211,7 +_,7 @@
+ 		public static bool SettingMusicReplayDelayEnabled = false;
+ 		public static bool HidePassword;
+ 		public static bool ReversedUpDownArmorSetBonuses;
+-		public static Microsoft.Xna.Framework.Color MouseBorderColor = new Microsoft.Xna.Framework.Color(64, 64, 64, 64);
++		public static Color MouseBorderColor = new Color(64, 64, 64, 64);
+ 		public static bool MouseShowBuildingGrid;
+ 		public static bool AllowUnfocusedInputOnGamepad;
+ 		public static bool InvisibleCursorForGamepad = true;
+@@ -234,7 +_,7 @@
+ 		public static NPCHeadRenderer BossNPCHeadRenderer = null;
+ 		public static string versionNumber = "v1.4.0.5";
+ 		public static string versionNumber2 = "v1.4.0.5";
+-		public static string SavePath = Program.LaunchParameters.ContainsKey("-savedirectory") ? Program.LaunchParameters["-savedirectory"] : Platform.Get<IPathService>().GetStoragePath("Terraria");
++		public static string SavePath = Program.LaunchParameters.ContainsKey("-savedirectory") ? Program.LaunchParameters["-savedirectory"] : Platform.Get<IPathService>().GetStoragePath("Terraria" + Path.DirectorySeparatorChar + "Avalon");
+ 		public static bool AnnouncementBoxDisabled;
+ 		public static int AnnouncementBoxRange = -1;
+ 		public static string AutogenSeedName;
+@@ -266,7 +_,7 @@
+ 		private static OnPlayerSelected _pendingCharacterSelect;
+ 		public static bool drawBackGore;
+ 		public static ulong LobbyId = 0uL;
+-		private static Microsoft.Xna.Framework.Color[] _mapColorCacheArray = new Microsoft.Xna.Framework.Color[30000];
++		private static Color[] _mapColorCacheArray = new Color[30000];
+ 		public WaterfallManager waterfallManager;
+ 		public static WorldSections sectionManager;
+ 		public static bool ServerSideCharacter;
 @@ -293,12 +_,12 @@
  		public static int dedServCount2;
  		public static bool superFast = false;
  		public const int offLimitBorderTiles = 40;
 -		public const int maxItemTypes = 5045;
-+		public const int maxItemTypes = ItemID.Count;
- 		public const int maxProjectileTypes = 950;
- 		public const int maxNPCTypes = 663;
- 		public const int maxTileSets = 623;
- 		public const int maxWallTypes = 316;
++		public const int maxItemTypes = ItemID.Count; // TODO: This is only the beginning of the stupid fucking maxXType variables
+-		public const int maxProjectileTypes = 950;
++		public const int maxProjectileTypes = 1140;
+-		public const int maxNPCTypes = 663;
++		public const int maxNPCTypes = 775;
+-		public const int maxTileSets = 623;
++		public const int maxTileSets = 775;
+-		public const int maxWallTypes = 316;
++		public const int maxWallTypes = 468;
 -		public const int maxBuffTypes = 323;
 +		public const int maxBuffTypes = BuffID.Count;
  		public const int maxGlowMasks = 301;
  		public const int maxExtras = 212;
  		public const int maxGoreTypes = 1269;
-@@ -518,15 +_,15 @@
+@@ -319,7 +_,7 @@
+ 		public const int numAccBalloon = 18;
+ 		public const int maxWings = 47;
+ 		public const int maxBackgrounds = 298;
+-		public const int MaxShopIDs = 100;
++		public const int MaxShopIDs = 100; // TODO: This isn't the end :weary:
+ 		private static float cameraLerp;
+ 		private static int cameraLerpTimer;
+ 		private static int cameraLerpTimeToggle;
+@@ -410,7 +_,7 @@
+ 		public static bool stopTimeOuts = false;
+ 		public static bool showSpam = false;
+ 		public static bool showItemOwner = false;
+-		public static bool[] townNPCCanSpawn = new bool[663];
++		public static bool[] townNPCCanSpawn = new bool[663]; // TODO: This is an array that needs to be changed
+ 		public static int musicBox2 = -1;
+ 		public static byte HealthBarDrawSettings = 1;
+ 		public static bool runningCollectorsEdition;
+@@ -457,6 +_,8 @@
+ 		public static int[] snowBG = new int[3];
+ 		public static int[] hallowBG = new int[3];
+ 		public static int[] crimsonBG = new int[3];
++		public static int contagionBG = 185;
++		public static int darkBG = 186;
+ 		public static int[] desertBG = new int[3];
+ 		public static int[] mushroomBG = new int[3];
+ 		public static int oceanBG;
+@@ -516,17 +_,17 @@
+ 		public static int buffScanAreaWidth = (maxScreenW + 800) / 16 - 1;
+ 		public static int buffScanAreaHeight = (maxScreenH + 800) / 16 - 1;
  		public static float musicPitch = 0f;
- 		public static bool[] projHostile = new bool[950];
+-		public static bool[] projHostile = new bool[950];
++		public static bool[] projHostile = new bool[950]; // TODO: haha more arrays that need to be changed
  		public static bool[] projHook = new bool[950];
 -		public static bool[] pvpBuff = new bool[323];
 +		public static bool[] pvpBuff = new bool[maxBuffTypes];
@@ -40,7 +204,53 @@
  		public static int maxMP = 10;
  		public static string[] recentWorld = new string[maxMP];
  		public static string[] recentIP = new string[maxMP];
-@@ -636,7 +_,7 @@
+@@ -549,6 +_,10 @@
+ 		public static int wofDrawAreaTop;
+ 		public static int wofDrawAreaBottom;
+ 		public static int wofDrawFrameIndex;
++		public static int wos = -1;
++		public static int wosDrawAreaTop;
++		public static int wosDrawAreaBottomw;
++		public static int wosDrawFrameIndex;
+ 		public static int offScreenRange = 200;
+ 		private RenderTarget2D backWaterTarget;
+ 		public static RenderTarget2D waterTarget;
+@@ -582,7 +_,7 @@
+ 		public static bool[,] initMap = new bool[mapTargetX, mapTargetY];
+ 		public static bool[,] mapWasContentLost = new bool[mapTargetX, mapTargetY];
+ 		public const int numInfoIcons = 13;
+-		public static Microsoft.Xna.Framework.Color OurFavoriteColor = new Microsoft.Xna.Framework.Color(255, 231, 69);
++		public static Color OurFavoriteColor = new Color(255, 231, 69);
+ 		public static bool mapInit;
+ 		public static bool mapEnabled = true;
+ 		public static int mapStyle = 1;
+@@ -627,16 +_,28 @@
+ 		private static Stopwatch saveTime = new Stopwatch();
+ 		public static KeyboardState keyState;
+ 		public static KeyboardState oldKeyState;
+-		public static Microsoft.Xna.Framework.Color mcColor = new Microsoft.Xna.Framework.Color(1f, 0.6f, 0f);
+-		public static Microsoft.Xna.Framework.Color hcColor = new Microsoft.Xna.Framework.Color(1f, 0.15f, 0.1f);
+-		public static Microsoft.Xna.Framework.Color creativeModeColor = Microsoft.Xna.Framework.Color.Lerp(Microsoft.Xna.Framework.Color.HotPink, Microsoft.Xna.Framework.Color.White, 0.1f);
+-		public static Microsoft.Xna.Framework.Color highVersionColor = new Microsoft.Xna.Framework.Color(255, 255, 0);
+-		public static Microsoft.Xna.Framework.Color errorColor = new Microsoft.Xna.Framework.Color(255, 0, 0);
++		public static Color mcColor = new Color(1f, 0.6f, 0f);
++		public static Color hcColor = new Color(1f, 0.15f, 0.1f);
++		public static Color creativeModeColor = Color.Lerp(Color.HotPink, Color.White, 0.1f);
++		public static Color highVersionColor = new Color(255, 255, 0);
++		public static Color errorColor = new Color(255, 0, 0);
++		public static int hellcastleTiles2; // TODO: Most of these "XTiles" ints probably need to be changed to whatever 1.4 does since there are no variables for vanilla biome tiles
++		public static int tropicTiles;
++		public static int cometTiles;
++		public static int ickyTiles;
++		public static int darkTiles;
++		public static int mightTiles;
++		public static int frightTiles;
++		public static int nightTiles;
++		public static int tortureTiles;
++		public static int timeTiles;
++		public static int blightTiles;
++		public static int jungSoulTiles;
+ 		public static bool craftingHide;
  		public static bool armorHide;
  		public static float craftingAlpha = 1f;
  		public static float armorAlpha = 1f;
@@ -49,6 +259,104 @@
  		public static bool hardMode;
  		public float chestLootScale = 1f;
  		public bool chestLootHover;
+@@ -654,6 +_,16 @@
+ 		public static Vector2 sceneWallPos = Vector2.Zero;
+ 		public static Vector2 sceneBackgroundPos = Vector2.Zero;
+ 		public static bool maxQ = true;
++		public static int SlowDiscoStyle;
++		public static int sDiscoR = 255;
++		public static int sDiscoG = 0;
++		public static int sDiscoB = 0;
++		public static int ROYStyle;
++		public static int ROYG = 0;
++		public static int GBVStyle;
++		public static int GBVR = 160;
++		public static int GBVG = 0;
++		public static int GBVB = 0;
+ 		public static float gfxQuality = 1f;
+ 		public static float gfxRate = 0.01f;
+ 		public int DiscoStyle;
+@@ -687,6 +_,10 @@
+ 		public static int maxTilesY = (int)bottomWorld / 16 + 1;
+ 		public const int sectionWidth = 200;
+ 		public const int sectionHeight = 150;
++		public static string seed;
++		public static int evil = 0;
++		public static int rhodium = 0;
++		public static int tropics = 0;
+ 		public static int maxSectionsX = maxTilesX / 200;
+ 		public static int maxSectionsY = maxTilesY / 150;
+ 		public const int maxDust = 6000;
+@@ -707,7 +_,7 @@
+ 		public static int slimeWarningTime;
+ 		public static int slimeWarningDelay = 420;
+ 		public static float slimeRainNPCSlots = 0.65f;
+-		public static bool[] slimeRainNPC = new bool[663];
++		public static bool[] slimeRainNPC = new bool[663]; // CHANGE THIS
+ 		public static double slimeRainTime;
+ 		public static bool slimeRain;
+ 		public static int slimeRainKillCount;
+@@ -760,10 +_,10 @@
+ 		public static int background;
+ 		public static int caveBackground = 0;
+ 		public static float ugBackTransition;
+-		public static Microsoft.Xna.Framework.Color tileColor;
++		public static Color tileColor;
+ 		public static double worldSurface;
+ 		public static double rockLayer;
+-		public static Microsoft.Xna.Framework.Color[] teamColor = new Microsoft.Xna.Framework.Color[6];
++		public static Color[] teamColor = new Color[6];
+ 		public const double dayLength = 54000.0;
+ 		public const double nightLength = 32400.0;
+ 		public static bool dayTime = true;
+@@ -788,8 +_,8 @@
+ 		public static int BartenderHelpTextIndex = 0;
+ 		public static bool autoGen;
+ 		public static bool autoPause = false;
+-		public static int[] projFrames = new int[950];
+-		public static bool[] projPet = new bool[950];
++		public static int[] projFrames = new int[950]; // TODO: More arrays
++		public static bool[] projPet = new bool[950]; // TODO: More arrays
+ 		public static float demonTorch = 1f;
+ 		public static int demonTorchDir = 1;
+ 		public static float martianLight = 1f;
+@@ -824,7 +_,7 @@
+ 		public static bool allChestStackHover;
+ 		public static bool inventorySortMouseOver;
+ 		public static float GraveyardVisualIntensity;
+-		public const int maxMoons = 9;
++		public const int maxMoons = 9; // TODO: Might need to adjust some of the variables here... depends on what avalon does.
+ 		public static int moonType = 0;
+ 		public const int numTileColors = 32;
+ 		public const int numTreeStyles = 31;
+@@ -837,14 +_,14 @@
+ 		public static AudioEngine engine;
+ 		public static SoundBank soundBank;
+ 		public static WaveBank waveBank;
+-		public static Cue[] music = new Cue[89];
++		public static Cue[] music = new Cue[98];
+-		public static bool[] musicNoCrossFade = new bool[89];
++		public static bool[] musicNoCrossFade = new bool[98];
+-		public static float[] musicFade = new float[89];
++		public static float[] musicFade = new float[98];
+ 		public static float musicVolume = 1f;
+ 		public static float ambientVolume = 1f;
+ 		public static float soundVolume = 1f;
+ 		public static ServerMode MenuServerMode = ServerMode.Lobby | ServerMode.FriendsCanJoin;
+-		public static bool[] tileLighted = new bool[623];
++		public static bool[] tileLighted = new bool[623]; // TODO: a ton of tile variables
+ 		public static bool[] tileMergeDirt = new bool[623];
+ 		public static bool[] tileCut = new bool[623];
+ 		public static bool[] tileAlch = new bool[623];
+@@ -953,7 +_,7 @@
+ 		public static int[] owlCageFrameCounter = new int[cageFrames];
+ 		public static int[] grasshopperCageFrame = new int[cageFrames];
+ 		public static int[] grasshopperCageFrameCounter = new int[cageFrames];
+-		public static bool[] tileSand = new bool[623];
++		public static bool[] tileSand = new bool[623]; // TODO: More arrays yaaaayyy!
+ 		public static bool[] tileFlame = new bool[623];
+ 		public static bool[] npcCatchable = new bool[663];
+ 		public static int[] tileFrame = new int[623];
 @@ -981,7 +_,7 @@
  		public static Sign[] sign = new Sign[1000];
  		public static int[] itemFrame = new int[401];
@@ -58,6 +366,149 @@
  		private static DrawAnimation _coinOnWorldAnimation = new DrawAnimationVertical(6, 8);
  		private static DrawAnimation _monkStaffT3OnWorldAnimation = new DrawAnimationVertical(5, 3);
  		public static List<int> itemAnimationsRegistered = new List<int>();
+@@ -1029,7 +_,7 @@
+ 		public static Item reforgeItem = new Item();
+ 		public static float inventoryScale = 0.75f;
+ 		public static bool hasFocus;
+-		public static Microsoft.Xna.Framework.Point rulerLineDisplayValues = default(Microsoft.Xna.Framework.Point);
++		public static Point rulerLineDisplayValues = default;
+ 		public static bool recFastScroll;
+ 		public static bool recBigList;
+ 		public static int recStart;
+@@ -1063,7 +_,7 @@
+ 		public static List<string> anglerWhoFinishedToday = new List<string>();
+ 		public static bool anglerQuestFinished;
+ 		public static int anglerQuest;
+-		public static int[] anglerQuestItemNetIDs = new int[41] {
++		public static int[] anglerQuestItemNetIDs = new int[41] { // TODO: Add fishes here that count as angler quest fish
+ 			2450,
+ 			2451,
+ 			2452,
+@@ -1179,7 +_,7 @@
+ 		public static float invasionProgressAlpha;
+ 		public static bool HasInteractibleObjectThatIsNotATile = false;
+ 		public int currentNPCShowingChatBubble = -1;
+-		public static int[] npcFrameCount = new int[663] {
++		public static int[] npcFrameCount = new int[663] { // TODO: adjust arrays and figure out how this works.
+ 			1,
+ 			2,
+ 			2,
+@@ -1873,9 +_,16 @@
+ 		public static string cMana = "J";
+ 		public static string cBuff = "B";
+ 		public static string cHook = "E";
++		public static string cStamina = "R";
+ 		public static string cTorch = "LeftShift";
+ 		public static string cInv = "Escape";
+ 		public static string cSmart = "LeftControl";
++		public static string cSprint = "F";
++		public static string cWallSlide = "G";
++		public static string cSwim = "L";
++		public static string cDashToggle = "K";
++		public static string cMode = "N";
++		public static string cTeleport = "V";
+ 		public static string cMount = "R";
+ 		public static string cFavoriteKey = "LeftAlt";
+ 		public static bool cSmartCursorModeIsToggleAndNotHold = true;
+@@ -1890,8 +_,8 @@
+ 		public static int SmartInteractNPC;
+ 		public static int SmartInteractProj;
+ 		public static bool SmartInteractPotionOfReturn;
+-		public static List<Microsoft.Xna.Framework.Point> SmartInteractTileCoords = new List<Microsoft.Xna.Framework.Point>();
+-		public static List<Microsoft.Xna.Framework.Point> SmartInteractTileCoordsSelected = new List<Microsoft.Xna.Framework.Point>();
++		public static List<Point> SmartInteractTileCoords = new List<Point>();
++		public static List<Point> SmartInteractTileCoordsSelected = new List<Point>();
+ 		public static int TileInteractionLX = -1;
+ 		public static int TileInteractionLY = -1;
+ 		public static int TileInteractionHX = -1;
+@@ -1907,8 +_,8 @@
+ 		public static Microsoft.Xna.Framework.Input.Keys FavoriteKey = Microsoft.Xna.Framework.Input.Keys.LeftAlt;
+ 		public static ColorSlidersSet mouseColorSlider = new ColorSlidersSet();
+ 		public static ColorSlidersSet mouseBorderColorSlider = new ColorSlidersSet();
+-		public static Microsoft.Xna.Framework.Color mouseColor = new Microsoft.Xna.Framework.Color(255, 50, 95);
+-		public static Microsoft.Xna.Framework.Color cursorColor = Microsoft.Xna.Framework.Color.White;
++		public static Color mouseColor = new Color(255, 50, 95);
++		public static Color cursorColor = Color.White;
+ 		public static int cursorColorDirection = 1;
+ 		public static float cursorAlpha;
+ 		public static float cursorScale;
+@@ -1920,6 +_,7 @@
+ 		public static int FrameSkipMode = 2;
+ 		public static bool terrariasFixedTiming = true;
+ 		private int splashCounter;
++		public static bool superHardmode = false;
+ 		public List<int> DrawCacheNPCsMoonMoon = new List<int>(200);
+ 		public List<int> DrawCacheNPCsOverPlayers = new List<int>(200);
+ 		public List<int> DrawCacheNPCProjectiles = new List<int>(200);
+@@ -2020,15 +_,16 @@
+ 		private static bool hidePVPIcons = false;
+ 		public static bool HoveringOverAnNPC;
+ 		public static string hoverItemName = "";
+-		public static Microsoft.Xna.Framework.Color inventoryBack = new Microsoft.Xna.Framework.Color(220, 220, 220, 220);
++		public static Color inventoryBack = new Color(220, 220, 220, 220);
+ 		public static bool mouseText;
+ 		private static int mH;
++		private static int barStamina;
+ 		private static int rare;
+ 		public static int hairStart;
+ 		private static int oldHairStyle;
+-		private static Microsoft.Xna.Framework.Color oldHairColor;
++		private static Color oldHairColor;
+ 		public static int selClothes;
+-		private static Microsoft.Xna.Framework.Color[] oldClothesColor = new Microsoft.Xna.Framework.Color[6];
++		private static Color[] oldClothesColor = new Color[6];
+ 		private static int oldClothesStyle;
+ 		public static int interactedDresserTopLeftX;
+ 		public static int interactedDresserTopLeftY;
+@@ -2042,7 +_,7 @@
+ 		private static int _itemIconCacheSelectedItemID;
+ 		private static int _itemIconCacheTime;
+ 		private static bool _cannotDrawAccessoriesHorizontally = false;
+-		public static Microsoft.Xna.Framework.Color selColor = Microsoft.Xna.Framework.Color.White;
++		public static Color selColor = Color.White;
+ 		public static int focusColor;
+ 		public static int colorDelay;
+ 		public static int setKey = -1;
+@@ -2067,7 +_,7 @@
+ 		private static int _minimapTopRightAnchorOffsetTowardsLeft = 52;
+ 		private static int _minimapTopRightAnchorOffsetTowardsBottom = 90;
+ 		public static bool cancelWormHole = false;
+-		private static VertexColors _glowPaintColors = new VertexColors(Microsoft.Xna.Framework.Color.White);
++		private static VertexColors _glowPaintColors = new VertexColors(Color.White);
+ 		protected List<Tuple<int, int, ushort>> DrawWiresSpecialTiles = new List<Tuple<int, int, ushort>>();
+ 		public static float lightning;
+ 		private static float lightningDecay = 1f;
+@@ -2092,9 +_,9 @@
+ 		public static float atmo;
+ 		private static float bgScale = 1f;
+ 		private static int bgWidthScaled = (int)(1024f * bgScale);
+-		public static Microsoft.Xna.Framework.Color ColorOfTheSkies;
+-		private static Microsoft.Xna.Framework.Color ColorOfSurfaceBackgroundsBase = Microsoft.Xna.Framework.Color.White;
+-		private static Microsoft.Xna.Framework.Color ColorOfSurfaceBackgroundsModified = Microsoft.Xna.Framework.Color.White;
++		public static Color ColorOfTheSkies;
++		private static Color ColorOfSurfaceBackgroundsBase = Color.White;
++		private static Color ColorOfSurfaceBackgroundsModified = Color.White;
+ 		private float screenOff;
+ 		private float scAdj;
+ 		private float cTop;
+@@ -2133,7 +_,7 @@
+ 		public float UIScaleMax {
+ 			get {
+ 				int realScreenWidth = PlayerInput.RealScreenWidth;
+-				float val2 = Math.Min(val2: (float)PlayerInput.RealScreenHeight / 600f, val1: (float)realScreenWidth / 800f);
++				float val2 = Math.Min(val2: PlayerInput.RealScreenHeight / 600f, val1: realScreenWidth / 800f);
+ 				return Math.Max(1f, val2);
+ 			}
+ 		}
+@@ -2149,7 +_,7 @@
+ 
+ 		public static bool IsItRaining => cloudAlpha > 0f;
+ 
+-		public static bool ThickMouse => MouseBorderColor != Microsoft.Xna.Framework.Color.Transparent;
++		public static bool ThickMouse => MouseBorderColor != Color.Transparent;
+ 
+ 		public static bool GamepadDisableCursorItemIcon {
+ 			get {
 @@ -2177,24 +_,14 @@
  			}
  		}
@@ -85,6 +536,275 @@
  					return _overrideForExpertMode.Value;
  
  				return _currentGameModeInfo.IsExpertMode;
+@@ -2366,7 +_,7 @@
+ 			return pos;
+ 		}
+ 
+-		public static Microsoft.Xna.Framework.Point ReverseGravitySupport(Microsoft.Xna.Framework.Point pos, int height = 0) {
++		public static Point ReverseGravitySupport(Point pos, int height = 0) {
+ 			if (player[myPlayer].gravDir != -1f)
+ 				return pos;
+ 
+@@ -2374,7 +_,7 @@
+ 			return pos;
+ 		}
+ 
+-		public static Microsoft.Xna.Framework.Rectangle ReverseGravitySupport(Microsoft.Xna.Framework.Rectangle box) {
++		public static Rectangle ReverseGravitySupport(Rectangle box) {
+ 			if (player[myPlayer].gravDir != -1f)
+ 				return box;
+ 
+@@ -2840,7 +_,7 @@
+ 				flag2 = false;
+ 				anglerQuest = rand.Next(anglerQuestItemNetIDs.Length);
+ 				int num = anglerQuestItemNetIDs[anglerQuest];
+-				if (num == 2454 && (!hardMode || WorldGen.crimson))
++				if (num == 2454 && (!hardMode || WorldGen.crimson || WorldGen.contagion))
+ 					flag2 = true;
+ 
+ 				if (num == 2457 && WorldGen.crimson)
+@@ -2876,8 +_,20 @@
+ 				if (num == 2484 && !hardMode)
+ 					flag2 = true;
+ 
++				if (num == 2485 && (WorldGen.crimson || WorldGen.contagion))
++					flag2 = true;
++
++				if (num == 2485 && (WorldGen.crimson || WorldGen.contagion))
++					flag2 = true;
++
+-				if (num == 2485 && WorldGen.crimson)
++				if (num == 3661 && !WorldGen.contagion)
+ 					flag2 = true;
++
++				if (num == 3662 && !WorldGen.contagion)
++					flag2 = true;
++
++				if (num == 3664 && !superHardmode)
++					flag = true;
+ 
+ 				if ((num == 2476 || num == 2453 || num == 2473) && !flag)
+ 					flag2 = true;
+@@ -3107,6 +_,12 @@
+ 			Configuration.Put("DoorAutoOpeningMode", DoorOpeningHelper.PreferenceSettings);
+ 			Configuration.Put("WaterfallDrawLimit", instance.waterfallManager.maxWaterfallCount);
+ 			Configuration.Put("DisableIntenseVisualEffects", DisableIntenseVisualEffects);
++			Configuration.Put("KeySprint", cSprint);
++			Configuration.Put("KeySwim", cSwim);
++			Configuration.Put("DashToggle", cDashToggle);
++			Configuration.Put("KeyWallSlide", cWallSlide);
++			Configuration.Put("KeyMode", cMode);
++			Configuration.Put("KeyTeleport", cTeleport);
+ 			if (Configuration.Save())
+ 				return PlayerInput.Save();
+ 
+@@ -3386,85 +_,63 @@
+ 				Configuration.Get("KeyMapZoomOut", ref cMapZoomOut);
+ 				Configuration.Get("KeyMapAlphaUp", ref cMapAlphaUp);
+ 				Configuration.Get("KeyMapAlphaDown", ref cMapAlphaDown);
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Up"] = new List<string> {
+-					cUp
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Down"] = new List<string> {
+-					cDown
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Left"] = new List<string> {
+-					cLeft
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Right"] = new List<string> {
+-					cRight
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Jump"] = new List<string> {
+-					cJump
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Throw"] = new List<string> {
+-					cThrowItem
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Inventory"] = new List<string> {
+-					cInv
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickHeal"] = new List<string> {
+-					cHeal
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickMana"] = new List<string> {
+-					cMana
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickBuff"] = new List<string> {
+-					cBuff
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Grapple"] = new List<string> {
+-					cHook
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["SmartSelect"] = new List<string> {
+-					cTorch
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["SmartCursor"] = new List<string> {
+-					cSmart
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickMount"] = new List<string> {
+-					cMount
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapStyle"] = new List<string> {
+-					cMapStyle
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapFull"] = new List<string> {
+-					cMapFull
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapZoomIn"] = new List<string> {
+-					cMapZoomIn
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapZoomOut"] = new List<string> {
+-					cMapZoomOut
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapAlphaUp"] = new List<string> {
+-					cMapAlphaUp
+-				};
+-
+-				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapAlphaDown"] = new List<string> {
+-					cMapAlphaDown
+-				};
++				Configuration.Get("KeySprint", ref cSprint);
++				Configuration.Get("KeySwim", ref cSwim);
++				Configuration.Get("KeyDashToggle", ref cDashToggle);
++				Configuration.Get("KeyWallSlide", ref cWallSlide);
++				Configuration.Get("KeyMode", ref cMode);
++				Configuration.Get("KeyTeleport", ref cTeleport);
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Up"] = new List<string> { cUp };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Down"] = new List<string> { cDown };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Left"] = new List<string> { cLeft };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Right"] = new List<string> { cRight };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Jump"] = new List<string> { cJump };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Throw"] = new List<string> { cThrowItem };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Inventory"] = new List<string> { cInv };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickHeal"] = new List<string> { cHeal };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickMana"] = new List<string> { cMana	};
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickBuff"] = new List<string> { cBuff	};
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Grapple"] = new List<string> { cHook };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["SmartSelect"] = new List<string> { cTorch };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["SmartCursor"] = new List<string> { cSmart };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["QuickMount"] = new List<string> { cMount };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapStyle"] = new List<string> { cMapStyle };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapFull"] = new List<string> { cMapFull };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapZoomIn"] = new List<string> { cMapZoomIn };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapZoomOut"] = new List<string> { cMapZoomOut };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapAlphaUp"] = new List<string> { cMapAlphaUp };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["MapAlphaDown"] = new List<string> { cMapAlphaDown };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Sprint"] = new List<string> { cSprint };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Swim"] = new List<string> { cSwim };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["DashToggle"] = new List<string> { cDashToggle };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["WallSlide"] = new List<string> { cWallSlide };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Mode"] = new List<string> { cMode };
++
++				PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["Teleport"] = new List<string> { cTeleport };
+ 			}
+ 
+ 			PlayerInput.Load();
+@@ -3589,6 +_,15 @@
+ 							if (num >= 111)
+ 								placementPreview = binaryReader.ReadBoolean();
+ 
++							if (num >= 231) {
++								cSprint = binaryReader.ReadString();
++								cSwim = binaryReader.ReadString();
++								cDashToggle = binaryReader.ReadString();
++								cWallSlide = binaryReader.ReadString();
++								cMode = binaryReader.ReadString();
++								cTeleport = binaryReader.ReadString();
++							}
++
+ 							SetFullScreen(flag);
+ 						}
+ 
+@@ -4456,7 +_,11 @@
+ 							"Dusk",
+ 							"Midnight",
+ 							"Settle",
+-							"Seed"
++							"Seed",
++							"Bomb",
++							"Rain",
++							"Rainoff",
++							"Settle"
+ 						};
+ 
+ 						int num = 0;
+@@ -4672,6 +_,34 @@
+ 								}
+ 							}
+ 						}
++
++						else if (text == Language.GetTextValue("CLI.Rainoff_Command")) {
++							StopRain();
++							Console.WriteLine("Rain stopped");
++						}
++
++						else if (text.StartsWith(Language.GetTextValue("CLI.Rain_Command"))) {
++							if (text.Length > 4) {
++								text = text.Split(' ')[1];
++								int intensity = int.Parse(text);
++								rand = new UnifiedRandom(1111111111);
++								StartRain();
++								cloudAlpha = intensity;
++								maxRaining = intensity;
++								Console.WriteLine("Rain started with an intensity of " + intensity);
++							}
++							else {
++								Console.WriteLine("Usage: " + Language.GetTextValue("CLI.Rain_Example"));
++								continue;
++							}
++
++						}
++
++						else if (text == Language.GetTextValue("CLI.Bomb_Command")) {
++							explosivesAllowed = !explosivesAllowed;
++							Console.WriteLine("Explosives are now " + (explosivesAllowed ? "enabled" : "disabled"));
++						}
++
+ 						else {
+ 							Console.WriteLine(Language.GetTextValue("CLI.InvalidCommand"));
+ 						}
 @@ -4725,7 +_,7 @@
  #if CLIENT
  			Configuration.Load();
@@ -94,6 +814,41 @@
  #endif
  		}
  
+@@ -4789,6 +_,34 @@
+ 			_gameUpdateCount = 0u;
+ 		}
+ 
++		public static void InitNPCLifeBytes() {
++			NPC nPC = new NPC();
++			for (int i = -69; i < 775; i++) {
++				if (i == 0)
++					continue;
++
++				nPC.SetDefaultsFromNetId(i);
++				if (superHardmode && !nPC.shmMob) {
++					if (nPC.shmLifeMax > 32767)
++						npcLifeBytes[i] = 4;
++
++					if (nPC.shmLifeMax > 127)
++						npcLifeBytes[i] = 2;
++
++					else
++						npcLifeBytes[i] = 1;
++				}
++
++				else if (nPC.lifeMax > 32767)
++					npcLifeBytes[i] = 4;
++
++				else if (nPC.lifeMax > 127)
++					npcLifeBytes[i] = 2;
++
++				else
++					npcLifeBytes[i] = 1;
++			}
++		}
+ 		protected override void Initialize() {
+ #if SERVER
+ 			netMode = 2;
 @@ -5020,7 +_,7 @@
  		}
  
@@ -103,7 +858,34 @@
  				Item item = new Item();
  				item.SetDefaults(i);
  				if (item.headSlot > 0)
-@@ -8341,9 +_,9 @@
+@@ -7194,7 +_,7 @@
+ 			tilePile[331] = true;
+ 			tilePile[332] = true;
+ 			tilePile[333] = true;
+-			for (int m = 0; m < 663; m++) {
++			for (int m = 0; m < 663; m++) { // CHANGE THIS
+ 				npcCatchable[m] = false;
+ 			}
+ 
+@@ -8225,6 +_,17 @@
+ 			FancyErrorPrinter.ShowFailedToLoadAssetError(e, assetPath);
+ 		}
+ 
++		public static void DrawFFTexture(SpriteBatch notSpriteBatch, Texture2D texture, Vector2 position, int width, int height, float scale, float rotation, int direction, int framecount, Rectangle frame, object overrideColor) {
++			Vector2 origin = new Vector2(texture.Width / 2, texture.Height / framecount / 2);
++			Color color = (overrideColor != null) ? ((Microsoft.Xna.Framework.Color)overrideColor) : Lighting.GetColor((int)(position.X + (float)width * 0.5f) / 16, (int)(position.Y + (float)height * 0.5f) / 16);
++
++			notSpriteBatch.Draw(texture, GetFFDrawPosition(position, origin, width, height, texture.Width, texture.Height, framecount, scale), (!frame.IsEmpty) ? frame : new Microsoft.Xna.Framework.Rectangle(0, 0, texture.Width, texture.Height), color, rotation, origin, scale, (direction == 1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
++		}
++
++		public static Vector2 GetFFDrawPosition(Vector2 position, Vector2 origin, int width, int height, int texWidth, int texHeight, int framecount, float scale) {
++			return position - screenPosition + new Vector2((float)width * 0.5f, height) - new Vector2((float)texWidth * scale / 2f, (float)texHeight * scale / (float)framecount) + origin * scale + new Vector2(0f, 5f);
++		}
++
+ 		protected override void LoadContent() {
+ 			SoundEngine.Initialize();
+ 			if (base.Services.Get<IAssetRepository>() == null)
+@@ -8341,21 +_,21 @@
  
  		private void LoadMusic() {
  			if (SoundEngine.IsAudioSupported) {
@@ -113,10 +895,11 @@
 +				soundBank = new SoundBank(engine, "Avalon Content\\Sound Bank.xsb");
 -				waveBank = new WaveBank(engine, "Content\\Wave Bank.xwb");
 +				waveBank = new WaveBank(engine, "Avalon Content\\Wave Bank.xwb");
- 				for (int i = 1; i < 89; i++) {
+-				for (int i = 1; i < 89; i++) {
++				for (int i = 1; i < 98; i++) {
  					music[i] = soundBank.GetCue("Music_" + i);
  				}
-@@ -8351,9 +_,9 @@
+ 			}
  		}
  
  		private IEnumerator LoadMusic_InSteps() {
@@ -127,8 +910,448 @@
 -			waveBank = new WaveBank(engine, "Content\\Wave Bank.xwb");
 +			waveBank = new WaveBank(engine, "Avalon Content\\Wave Bank.xwb");
  			yield return null;
- 			for (int i = 1; i < 89; i++) {
+-			for (int i = 1; i < 89; i++) {
++			for (int i = 1; i < 98; i++) {
  				music[i] = soundBank.GetCue("Music_" + i);
+ 				yield return null;
+ 			}
+@@ -8378,7 +_,7 @@
+ 				if (snowMoon && waveNumber >= 20)
+ 					forceXMasForToday = true;
+ 
+-				Microsoft.Xna.Framework.Color color = new Microsoft.Xna.Framework.Color(50, 255, 130);
++				Color color = new Color(50, 255, 130);
+ 				if (num != forceHalloweenForToday)
+ 					WorldGen.BroadcastText(NetworkText.FromKey(forceHalloweenForToday ? "Misc.StartedVictoryHalloween" : "Misc.EndedVictoryHalloween"), color);
+ 
+@@ -8506,6 +_,12 @@
+ 					UpdateAudio_DecideOnNewMusic();
+ 				}
+ 
++				if (jukeboxActive.ContainsKey(worldName)) {
++					if (jukeboxActive[worldName])
++						musicBox2 = jukeBox2;
++				}
++				else
++					musicBox2 = -1;
+ 				if (gameMenu || musicVolume == 0f) {
+ 					musicBox2 = -1;
+ 					SceneMetrics.ActiveMusicBox = -1;
+@@ -8790,13 +_,13 @@
+ 						curMusic = 0;
+ 					}
+ 
+-					if (NPC.MoonLordCountdown == 1 && curMusic >= 1 && curMusic < 89)
++					if (NPC.MoonLordCountdown == 1 && curMusic >= 1 && curMusic < 98)
+ 						musicFade[curMusic] = 0f;
+ 				}
+ 
+-				for (int k = 1; k < 89; k++) {
++				for (int k = 1; k < 98; k++) {
+ 					float num2 = musicFade[k] * musicVolume * num;
+-					if (k >= 62 && k <= 88) {
++					if (k >= 62 && k <= 97) {
+ 						num2 *= 0.9f;
+ 					}
+ 					else if (k == 52) {
+@@ -8816,7 +_,7 @@
+ 									num7 = 0f;
+ 
+ 								num7 *= (float)Math.Pow(atmo, 4.0);
+-								if (cloudAlpha > 0f && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2) && !player[myPlayer].ZoneSnow) {
++								if (cloudAlpha > 0f && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (screenHeight / 2) && !player[myPlayer].ZoneSnow) {
+ 									if (ambientVolume == 0f || num7 == 0f) {
+ 										if (music[k].IsPlaying)
+ 											music[k].Stop(AudioStopOptions.Immediate);
+@@ -8831,7 +_,7 @@
+ 										continue;
+ 									}
+ 
+-									if (music[k].IsPaused && base.IsActive) {
++									if (music[k].IsPaused && IsActive) {
+ 										music[k].Resume();
+ 										continue;
+ 									}
+@@ -8869,7 +_,7 @@
+ 								num4 *= 0.9f;
+ 								float num5 = 20f;
+ 								num4 *= (float)Math.Pow(atmo, 4.0);
+-								if (!gameMenu && Math.Abs(windSpeedCurrent) >= num5 / 50f && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2)) {
++								if (!gameMenu && Math.Abs(windSpeedCurrent) >= num5 / 50f && player[myPlayer].position.Y < worldSurface * 16.0 + (screenHeight / 2)) {
+ 									if (ambientVolume == 0f || num4 == 0f) {
+ 										if (music[k].IsPlaying)
+ 											music[k].Stop(AudioStopOptions.Immediate);
+@@ -8884,7 +_,7 @@
+ 										continue;
+ 									}
+ 
+-									if (music[k].IsPaused && base.IsActive) {
++									if (music[k].IsPaused && IsActive) {
+ 										music[k].Resume();
+ 										continue;
+ 									}
+@@ -8983,8 +_,9 @@
+ 			bool flag13 = false;
+ 			bool flag14 = false;
+ 			bool flag15 = false;
++
+ 			if (!showSplash) {
+-				Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle((int)screenPosition.X, (int)screenPosition.Y, screenWidth, screenHeight);
++				Rectangle rectangle = new Rectangle((int)screenPosition.X, (int)screenPosition.Y, screenWidth, screenHeight);
+ 				int num = 5000;
+ 				for (int i = 0; i < 200; i++) {
+ 					if (!npc[i].active)
+@@ -9096,7 +_,7 @@
+ 					if (num2 == 0)
+ 						continue;
+ 
+-					Microsoft.Xna.Framework.Rectangle value = new Microsoft.Xna.Framework.Rectangle((int)(npc[i].position.X + (float)(npc[i].width / 2)) - num, (int)(npc[i].position.Y + (float)(npc[i].height / 2)) - num, num * 2, num * 2);
++					Rectangle value = new Rectangle((int)(npc[i].position.X + (float)(npc[i].width / 2)) - num, (int)(npc[i].position.Y + (float)(npc[i].height / 2)) - num, num * 2, num * 2);
+ 					if (rectangle.Intersects(value)) {
+ 						switch (num2) {
+ 							case 1:
+@@ -9151,7 +_,7 @@
+ 				}
+ 			}
+ 
+-			_ = (screenPosition.X + (float)(screenWidth / 2)) / 16f;
++			_ = (screenPosition.X + (screenWidth / 2)) / 16f;
+ 			if (musicVolume == 0f) {
+ 				newMusic = 0;
+ 				return;
+@@ -9159,7 +_,7 @@
+ 
+ 			float num3 = maxTilesX / 4200;
+ 			num3 *= num3;
+-			float num4 = (float)((double)((screenPosition.Y + (float)(screenHeight / 2)) / 16f - (65f + 10f * num3)) / (worldSurface / 5.0));
++			float num4 = (float)(((screenPosition.Y + (screenHeight / 2)) / 16f - (65f + 10f * num3)) / (worldSurface / 5.0));
+ 			if (flag7) {
+ 				newMusic = 84;
+ 			}
+@@ -9330,6 +_,9 @@
+ 			bool flag15 = false;
+ 			bool flag16 = LocalPlayer.townNPCs > 2f;
+ 			bool flag17 = slimeRain;
++			bool desertBeak = false;
++			bool armageddonSlime = false;
++			bool bacteriumPrime = false;
+ 			float num = 0f;
+ 			for (int i = 0; i < 89; i++) {
+ 				if (musicFade[i] > num) {
+@@ -9343,8 +_,8 @@
+ 				musicNoCrossFade[51] = true;
+ 
+ 			if (!showSplash) {
+-				Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle((int)screenPosition.X, (int)screenPosition.Y, screenWidth, screenHeight);
+-				int num2 = 5000;
++				Rectangle rectangle = new Rectangle((int)screenPosition.X, (int)screenPosition.Y, screenWidth, screenHeight);
++				int num2;
+ 				for (int j = 0; j < 200; j++) {
+ 					if (!npc[j].active)
+ 						continue;
+@@ -9437,6 +_,15 @@
+ 						case 370:
+ 							num3 = 15;
+ 							break;
++						case NPCID.DesertBeak:
++							num3 = 16;
++							break;
++						case NPCID.ArmageddonSlime:
++							num3 = 17;
++							break;
++						case NPCID.BacteriumPrime:
++							num3 = 18;
++							break;
+ 					}
+ 
+ 					if (NPCID.Sets.BelongsToInvasionOldOnesArmy[npc[j].type])
+@@ -9448,7 +_,7 @@
+ 					if (num3 == 0)
+ 						continue;
+ 
+-					Microsoft.Xna.Framework.Rectangle value = new Microsoft.Xna.Framework.Rectangle((int)(npc[j].position.X + (float)(npc[j].width / 2)) - num2, (int)(npc[j].position.Y + (float)(npc[j].height / 2)) - num2, num2 * 2, num2 * 2);
++					Rectangle value = new Rectangle((int)(npc[j].position.X + (float)(npc[j].width / 2)) - num2, (int)(npc[j].position.Y + (float)(npc[j].height / 2)) - num2, num2 * 2, num2 * 2);
+ 					if (rectangle.Intersects(value)) {
+ 						switch (num3) {
+ 							case 1:
+@@ -9496,6 +_,15 @@
+ 							case 15:
+ 								flag15 = true;
+ 								break;
++							case 16:
++								desertBeak = true;
++								break;
++							case 17:
++								armageddonSlime = true;
++								break;
++							case 18:
++								bacteriumPrime = true;
++								break;
+ 						}
+ 
+ 						break;
+@@ -9584,7 +_,16 @@
+ 			else if (flag12) {
+ 				newMusic = 41;
+ 			}
++			else if (desertBeak) {
++				newMusic = 93;
++			}
++			else if (armageddonSlime) {
++				newMusic = 92;
++			}
++			else if (bacteriumPrime) {
++				newMusic = 91;
++			}
+-			else if (eclipse && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2)) {
++			else if (eclipse && player[myPlayer].position.Y < worldSurface * 16.0 + (screenHeight / 2)) {
+ 				newMusic = 27;
+ 			}
+ 			else if (flag17 && !player[myPlayer].ZoneGraveyard && (!bloodMoon || dayTime) && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2)) {
+@@ -9643,9 +_,9 @@
+ 			else if (player[myPlayer].ZoneJungle) {
+ 				if ((double)player[myPlayer].position.Y > rockLayer * 16.0 + (double)(screenHeight / 2))
+ 					newMusic = 54;
+-				else if (newMusic == 54 && (double)player[myPlayer].position.Y > (rockLayer - 50.0) * 16.0 + (double)(screenHeight / 2))
++				else if (newMusic == 54 && (double)player[myPlayer].position.Y > (rockLayer - 50.0) * 16.0 + (screenHeight / 2))
+ 					newMusic = 54;
+-				else if (_shouldUseStormMusic && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (double)(screenHeight / 2))
++				else if (_shouldUseStormMusic && (double)player[myPlayer].position.Y < worldSurface * 16.0 + (screenHeight / 2))
+ 					newMusic = 52;
+ 				else if (dayTime)
+ 					newMusic = 7;
+@@ -9653,17 +_,17 @@
+ 					newMusic = 55;
+ 			}
+ 			else if (player[myPlayer].ZoneSnow) {
+-				if ((double)player[myPlayer].position.Y > worldSurface * 16.0 + (double)(screenHeight / 2))
++				if (player[myPlayer].position.Y > worldSurface * 16.0 + (screenHeight / 2))
+ 					newMusic = 20;
+ 				else
+ 					newMusic = 14;
+ 			}
+-			else if ((double)player[myPlayer].position.Y >= worldSurface * 16.0 + (double)(screenHeight / 2) && !WorldGen.oceanDepths((int)(screenPosition.X + (float)(screenWidth / 2)) / 16, (int)(screenPosition.Y + (float)(screenHeight / 2)) / 16)) {
++			else if (player[myPlayer].position.Y >= worldSurface * 16.0 + (screenHeight / 2) && !WorldGen.oceanDepths((int)(screenPosition.X + (float)(screenWidth / 2)) / 16, (int)(screenPosition.Y + (float)(screenHeight / 2)) / 16)) {
+ 				if (player[myPlayer].ZoneHallow) {
+ 					newMusic = 11;
+ 				}
+ 				else if (player[myPlayer].ZoneUndergroundDesert) {
+-					if ((double)player[myPlayer].position.Y >= worldSurface * 16.0 + (double)(screenHeight / 2))
++					if (player[myPlayer].position.Y >= worldSurface * 16.0 + (screenHeight / 2))
+ 						newMusic = 61;
+ 					else
+ 						newMusic = 21;
+@@ -9710,7 +_,7 @@
+ 				else
+ 					newMusic = 52;
+ 			}
+-			else if (WorldGen.oceanDepths((int)(screenPosition.X + (float)(screenWidth / 2)) / 16, (int)(screenPosition.Y + (float)(screenHeight / 2)) / 16)) {
++			else if (WorldGen.oceanDepths((int)(screenPosition.X + (screenWidth / 2)) / 16, (int)(screenPosition.Y + (screenHeight / 2)) / 16)) {
+ 				if (bloodMoon) {
+ 					newMusic = 2;
+ 				}
+@@ -9725,7 +_,7 @@
+ 				}
+ 			}
+ 			else if (player[myPlayer].ZoneDesert) {
+-				if ((double)player[myPlayer].position.Y >= worldSurface * 16.0) {
++				if (player[myPlayer].position.Y >= worldSurface * 16.0) {
+ 					int num6 = (int)(player[myPlayer].Center.X / 16f);
+ 					int num7 = (int)(player[myPlayer].Center.Y / 16f);
+ 					if (WorldGen.InWorld(num6, num7) && (WallID.Sets.Conversion.Sandstone[tile[num6, num7].wall] || WallID.Sets.Conversion.HardenedSand[tile[num6, num7].wall]))
+@@ -9769,10 +_,10 @@
+ 					newMusic = 3;
+ 			}
+ 
+-			if ((double)(screenPosition.Y / 16f) < worldSurface + 10.0 && pumpkinMoon)
++			if ((screenPosition.Y / 16f) < worldSurface + 10.0 && pumpkinMoon)
+ 				newMusic = 30;
+ 
+-			if ((double)(screenPosition.Y / 16f) < worldSurface + 10.0 && snowMoon)
++			if ((screenPosition.Y / 16f) < worldSurface + 10.0 && snowMoon)
+ 				newMusic = 32;
+ 		}
+ 
+@@ -9867,7 +_,7 @@
+ 			DateTime now = DateTime.Now;
+ 			int day = now.Day;
+ 			int month = now.Month;
+-			if (day >= 15 && month == 12)
++			if (day >= 1 && month == 12)
+ 				xMas = true;
+ 			else
+ 				xMas = false;
+@@ -9880,7 +_,7 @@
+ 			DateTime now = DateTime.Now;
+ 			int day = now.Day;
+ 			int month = now.Month;
+-			if (day >= 10 && month == 10)
++			if (day >= 1 && month == 10)
+ 				halloween = true;
+ 			else if (day <= 1 && month == 11)
+ 				halloween = true;
+@@ -9935,12 +_,12 @@
+ 			}
+ 		}
+ 
+-		public static void TeleportEffect(Microsoft.Xna.Framework.Rectangle effectRect, int Style, int extraInfo = 0, float dustCountMult = 1f, TeleportationSide side = TeleportationSide.Entry, Vector2 otherPosition = default(Vector2)) {
++		public static void TeleportEffect(Rectangle effectRect, int Style, int extraInfo = 0, float dustCountMult = 1f, TeleportationSide side = TeleportationSide.Entry, Vector2 otherPosition = default) {
+ 			switch (Style) {
+ 				case 0: {
+ 						SoundEngine.PlaySound(SoundID.Item6, effectRect.X + effectRect.Width / 2, effectRect.Y + effectRect.Height / 2);
+ 						int num10 = effectRect.Width * effectRect.Height / 5;
+-						num10 = (int)((float)num10 * dustCountMult);
++						num10 = (int)(num10 * dustCountMult);
+ 						for (int num11 = 0; num11 < num10; num11++) {
+ 							int num12 = Dust.NewDust(new Vector2(effectRect.X, effectRect.Y), effectRect.Width, effectRect.Height, 159);
+ 							Main.dust[num12].scale = (float)rand.Next(20, 70) * 0.01f;
+@@ -9956,10 +_,10 @@
+ 				case 1: {
+ 						SoundEngine.PlaySound(SoundID.Item8, effectRect.X + effectRect.Width / 2, effectRect.Y + effectRect.Height / 2);
+ 						int num3 = effectRect.Width * effectRect.Height / 5;
+-						num3 = (int)((float)num3 * dustCountMult);
++						num3 = (int)(num3 * dustCountMult);
+ 						for (int k = 0; k < num3; k++) {
+ 							int num4 = Dust.NewDust(new Vector2(effectRect.X, effectRect.Y), effectRect.Width, effectRect.Height, 164);
+-							Main.dust[num4].scale = (float)rand.Next(20, 70) * 0.01f;
++							Main.dust[num4].scale = rand.Next(20, 70) * 0.01f;
+ 							if (k < 10)
+ 								Main.dust[num4].scale += 0.25f;
+ 
+@@ -12409,6 +_,8 @@
+ 				SetTitle();
+ 			}
+ 
++			Stopwatch stopwatch = new Stopwatch();
++			stopwatch.Start();
+ 			_worldUpdateTimeTester.Restart();
+ 			if (!WorldGen.gen)
+ 				WorldGen.destroyObject = false;
+@@ -14045,6 +_,8 @@
+ 			if (++tileFrameCounter[597] >= 64)
+ 				tileFrameCounter[597] = 0;
+ 
++			//TODO: Animate tiles
++
+ 			int num2 = (int)MathHelper.Clamp((float)Math.Floor(Math.Abs(WindForVisuals) * 10f) * (float)Math.Sign(WindForVisuals), -5f, 5f);
+ 			tileFrameCounter[489] += num2;
+ 			tileFrameCounter[489] %= 320;
+@@ -14329,6 +_,115 @@
+ 					DiscoStyle = 0;
+ 				}
+ 			}
++
++			int num2 = 4;
++			if (SlowDiscoStyle == 0) {
++				sDiscoG += num2;
++				if (sDiscoG >= 255) {
++					sDiscoG = 255;
++					SlowDiscoStyle++;
++				}
++			}
++
++			if (SlowDiscoStyle == 1) {
++				sDiscoR -= num2;
++				if (sDiscoR <= 0) {
++					sDiscoR = 0;
++					SlowDiscoStyle++;
++				}
++			}
++
++			if (SlowDiscoStyle == 2) {
++				sDiscoB += num2;
++				if (sDiscoB >= 255) {
++					sDiscoB = 255;
++					SlowDiscoStyle++;
++				}
++			}
++
++			if (SlowDiscoStyle == 3) {
++				sDiscoG -= num2;
++				if (sDiscoG <= 0) {
++					sDiscoG = 0;
++					SlowDiscoStyle++;
++				}
++			}
++
++			if (SlowDiscoStyle == 4) {
++				sDiscoR += num2;
++				if (sDiscoR >= 255) {
++					sDiscoR = 255;
++					SlowDiscoStyle++;
++				}
++			}
++
++			if (SlowDiscoStyle == 5) {
++				sDiscoB -= num2;
++				if (sDiscoB <= 0) {
++					sDiscoB = 0;
++					SlowDiscoStyle = 0;
++				}
++			}
++
++			if (ROYStyle == 0) {
++				ROYG += 5;
++				if (ROYG >= 255) {
++					ROYG = 255;
++					ROYStyle = 1;
++				}
++			}
++
++			if (ROYStyle == 1) {
++				ROYG -= 5;
++				if (ROYG <= 0) {
++					ROYG = 0;
++					ROYStyle = 0;
++				}
++			}
++
++			if (GBVStyle == 0) {
++				GBVR -= 5;
++				if (GBVR <= 0) {
++					GBVR = 0;
++					GBVStyle = 1;
++				}
++			}
++
++			if (GBVStyle == 1) {
++				GBVG += 5;
++				if (GBVG >= 255) {
++					GBVG = 255;
++				}
++				if (GBVG >= 160) {
++					GBVB -= 5;
++					if (GBVB <= 0) {
++						GBVB = 0;
++						GBVStyle = 2;
++					}
++				}
++			}
++
++			if (GBVStyle == 2) {
++				GBVG -= 5;
++				if (GBVG <= 0) {
++					GBVG = 0;
++				}
++				if (GBVG <= 160) {
++					GBVB += 5;
++					if (GBVB >= 255) {
++						GBVB = 255;
++						GBVStyle = 3;
++					}
++				}
++			}
++
++			if (GBVStyle == 3) {
++				GBVR += 5;
++				if (GBVR >= 160) {
++					GBVR = 160;
++					GBVStyle = 0;
++				}
++			}
+ 		}
+ 
+ 		private static void DoUpdate_AnimateBackgrounds() {
 @@ -14757,7 +_,7 @@
  
  			float num2 = (float)(int)mouseTextColor / 255f;
@@ -205,6 +1428,15 @@
  				numLines++;
  			}
  
+@@ -16293,7 +_,7 @@
+ 			Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle((int)screenPosition.X - 800, (int)screenPosition.Y - 800, screenWidth + 1600, screenHeight + 1600);
+ 			for (int num = 199; num >= 0; num--) {
+ 				try {
+-					if (npc[num].active && npc[num].type > 0 && npc[num].type < 663 && !npc[num].hide) {
++					if (npc[num].active && npc[num].type > 0 && npc[num].type < 663 && !npc[num].hide) { // CHANGE THIS
+ 						npc[num].position += npc[num].netOffset;
+ 						if (npc[num].behindTiles == behindTiles) {
+ 							if (npc[num].type == 125 || npc[num].type == 126) {
 @@ -38852,10 +_,16 @@
  					if (num107 == 3)
  						num109 = 2;
@@ -223,5 +1455,14 @@
 -					spriteBatch.DrawString(FontAssets.MouseText.Value, versionNumber, new Vector2(origin2.X + (float)num108 + 10f, (float)screenHeight - origin2.Y + (float)num109 - 2f), color12, 0f, origin2, 1f, SpriteEffects.None, 0f);
 +					spriteBatch.DrawString(FontAssets.MouseText.Value, avalonVersion, new Vector2(origin3.X + (float)num108 + 10f, (float)screenHeight - origin3.Y + (float)num109 - 2f), color12, 0f, origin3, 1f, SpriteEffects.None, 0f);
  				}
+ 			}
+ 
+@@ -49618,7 +_,7 @@
+ 					num++;
+ 			}
+ 
+-			for (int j = 0; j < 663; j++) {
++			for (int j = 0; j < 663; j++) { // CHANGE THIS
+ 				townNPCCanSpawn[j] = false;
  			}
  

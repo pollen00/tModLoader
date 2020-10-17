@@ -1,5 +1,35 @@
 --- src/Terraria/Terraria/GameContent/TextureAssets.cs
 +++ src/Avalon/Terraria/GameContent/TextureAssets.cs
+@@ -1,12 +_,11 @@
+ using Microsoft.Xna.Framework.Graphics;
+ using ReLogic.Content;
++using System.Security.RightsManagement;
+ 
+ namespace Terraria.GameContent
+ {
+-	public static class TextureAssets
+-	{
+-		public static class RenderTargets
+-		{
++	public static class TextureAssets {
++		public static class RenderTargets {
+ 			public static PlayerRainbowWingsTextureContent PlayerRainbowWings;
+ 			public static PlayerTitaniumStormBuffTextureContent PlayerTitaniumStormBuff;
+ 			public static PlayerQueenSlimeMountTextureContent QueenSlimeMount;
+@@ -162,6 +_,13 @@
+ 		public static Asset<Texture2D> Chain41;
+ 		public static Asset<Texture2D> Chain42;
+ 		public static Asset<Texture2D> Chain43;
++		public static Asset<Texture2D> AvalonChain38;
++		public static Asset<Texture2D> AvalonChain39;
++		public static Asset<Texture2D> AvalonChain40;
++		public static Asset<Texture2D> AvalonChain41;
++		public static Asset<Texture2D> AvalonChain42;
++		public static Asset<Texture2D> AvalonChain43;
++		public static Asset<Texture2D> AvalonChain44;
+ 		public static Asset<Texture2D> Hb1;
+ 		public static Asset<Texture2D> Hb2;
+ 		public static Asset<Texture2D> Chaos;
 @@ -177,9 +_,9 @@
  		public static Asset<Texture2D>[] NpcToggle = new Asset<Texture2D>[2];
  		public static Asset<Texture2D>[] HbLock = new Asset<Texture2D>[2];
@@ -13,3 +43,37 @@
  		public static Asset<Texture2D>[] Npc = new Asset<Texture2D>[663];
  		public static Asset<Texture2D>[] Projectile = new Asset<Texture2D>[950];
  		public static Asset<Texture2D>[] Gore = new Asset<Texture2D>[1269];
+@@ -210,7 +_,13 @@
+ 		public static Asset<Texture2D>[] LiquidSlope = new Asset<Texture2D>[13];
+ 		public static Asset<Texture2D> Heart;
+ 		public static Asset<Texture2D> Heart2;
++		public static Asset<Texture2D> Heart3;
+ 		public static Asset<Texture2D> Mana;
++		public static Asset<Texture2D> Mana2;
++		public static Asset<Texture2D> Mana3;
++		public static Asset<Texture2D> Mana4;
++		public static Asset<Texture2D> Mana5;
++		public static Asset<Texture2D> Mana6;
+ 		public static Asset<Texture2D> Bubble;
+ 		public static Asset<Texture2D> Flame;
+ 		public static Asset<Texture2D>[] TreeTop = new Asset<Texture2D>[31];
+@@ -291,5 +_,19 @@
+ 		public static Asset<Texture2D> GolfBallArrow;
+ 		public static Asset<Texture2D> GolfBallArrowShadow;
+ 		public static Asset<Texture2D> GolfBallOutline;
++		public static Asset<Texture2D>[] JukeTexture = new Asset<Texture2D>[34];
++		public static Asset<Texture2D> ForceField;
++		public static Asset<Texture2D> Lightning1;
++		public static Asset<Texture2D> Lightning2;
++		public static Asset<Texture2D> OuterTTex;
++		public static Asset<Texture2D> ChainTTex;
++		public static Asset<Texture2D> ConnectTex;
++		public static Asset<Texture2D> WosTexture;
++		public static Asset<Texture2D> IckyCactus;
++		public static Asset<Texture2D> Stamina;
++		public static Asset<Texture2D> BeamPhantasm;
++		public static Asset<Texture2D> BeamVenoshock;
++		public static Asset<Texture2D> BeamEnd;
++		public static Asset<Texture2D> BeamStart;
+ 	}
+ }

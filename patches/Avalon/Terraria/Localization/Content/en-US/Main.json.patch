@@ -1,0 +1,25 @@
+--- src/Terraria/Terraria/Localization/Content/en-US/Main.json
++++ src/Avalon/Terraria/Localization/Content/en-US/Main.json
+@@ -52,6 +_,13 @@
+ 		"Ban_Command": "ban",
+ 		"Ban_Example": "ban <player>",
+ 		"Ban_Description": "Bans a player from the server.",
++		"Rain_Command": "rain",
++		"Rain_Example": "rain <intensity>",
++		"Rain_Description": "Starts rain, intensity is specified with a number",
++		"Rainoff_Command": "rainoff",
++		"Rainoff_Description": "Turns rain off",
++		"Bomb_Command": "allowexplosives",
++		"Bomb_Description": "Toggles explosives on or off",
+ 		"Password_Command": "password",
+ 		"Password_Description": "Show password.",
+ 		"SetPassword_Command": "password",
+@@ -850,7 +_,7 @@
+ 		"4": "Land of the Moon",
+ 		"5": "Working Ant's Nest"
+ 	},
+-	
++
+ 	"RandomWorldName_Composition": {
+ 		"1": "The {Adjective} {Location} of {Noun}",
+ 		"2": "The {Adjective} {Location} of {Noun}",

@@ -1,0 +1,35 @@
+--- src/Terraria/Terraria/WorldGen.cs
++++ src/Avalon/Terraria/WorldGen.cs
+@@ -4,6 +_,7 @@
+ using System.Diagnostics;
+ using System.Threading;
+ using System.Threading.Tasks;
++using System.Windows.Forms;
+ using Terraria.Audio;
+ using Terraria.Chat;
+ using Terraria.DataStructures;
+@@ -29,6 +_,16 @@
+ {
+ 	public class WorldGen
+ 	{
++		public static int seed;
++		public static byte blbTimer = 0;
++		public static Vector2 hiddenTemplePos = Vector2.Zero;
++		public static bool rhodium = true;
++		public static int contagionBG = 0;
++		public static int darkBG = 0;
++		public static int shmOreTeir1 = -1;
++		public static int shmOreTeir2 = -1;
++		public static bool tropics = false;
++		public static bool contagion = false;
+ 		public static class SavedOreTiers
+ 		{
+ 			public static int Copper = 7;
+@@ -16186,6 +_,7 @@
+ 
+ 		public static void smCallBack(object threadContext) {
+ 			IsGeneratingHardMode = true;
++			Main.InitNPCLifeBytes();
+ 			if (Main.rand == null)
+ 				Main.rand = new UnifiedRandom((int)DateTime.Now.Ticks);
+ 

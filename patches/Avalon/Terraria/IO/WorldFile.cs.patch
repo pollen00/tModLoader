@@ -1,5 +1,13 @@
 --- src/Terraria/Terraria/IO/WorldFile.cs
 +++ src/Avalon/Terraria/IO/WorldFile.cs
+@@ -386,6 +_,7 @@
+ 						WorldGen.WaterCheck();
+ 						WorldGen.gen = false;
+ 						NPC.setFireFlyChance();
++						Main.InitNPCLifeBytes();
+ 						if (Main.slimeRainTime > 0.0)
+ 							Main.StartSlimeRain(announce: false);
+ 
 @@ -935,6 +_,7 @@
  			writer.Write(NPC.boughtBunny);
  			writer.Write(NPC.downedEmpressOfLight);

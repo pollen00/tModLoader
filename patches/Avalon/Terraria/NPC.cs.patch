@@ -1,14 +1,17 @@
 --- src/Terraria/Terraria/NPC.cs
 +++ src/Avalon/Terraria/NPC.cs
-@@ -24,7 +_,7 @@
+@@ -24,8 +_,10 @@
  
  namespace Terraria
  {
 -	public class NPC : Entity
 +	public partial class NPC : Entity
  	{
++		public bool shmMob;
++		public int shmLifeMax;
  		private const int NPC_TARGETS_START = 300;
  		public bool IsABestiaryIconDummy;
+ 		public bool ForcePartyHatOn;
 @@ -110,7 +_,7 @@
  		public const int maxBuffs = 5;
  		public int[] buffType = new int[5];
@@ -18,6 +21,15 @@
  		public bool midas;
  		public bool ichor;
  		public bool onFire;
+@@ -2093,7 +_,7 @@
+ 			return type;
+ 		}
+ 
+-		private void SetDefaultsFromNetId(int id, NPCSpawnParams spawnparams = default(NPCSpawnParams)) {
++		public void SetDefaultsFromNetId(int id, NPCSpawnParams spawnparams = default(NPCSpawnParams)) {
+ 			bool flag = false;
+ 			int num = NPCID.FromNetId(id);
+ 			SetDefaults(0);
 @@ -2837,7 +_,7 @@
  				buffType[k] = 0;
  			}
