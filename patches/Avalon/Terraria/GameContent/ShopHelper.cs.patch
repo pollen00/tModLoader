@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/GameContent/ShopHelper.cs
++++ src/Avalon/Terraria/GameContent/ShopHelper.cs
+@@ -118,7 +_,7 @@
+ 					_currentPriceAdjustment *= 0.95f;
+ 				}
+ 
+-				bool[] array = new bool[665];
++				bool[] array = new bool[Main.maxNPCTypes];
+ 				foreach (NPC item in nearbyResidentNPCs) {
+ 					array[item.type] = true;
+ 				}

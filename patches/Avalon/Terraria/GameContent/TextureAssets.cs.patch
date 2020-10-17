@@ -1,0 +1,38 @@
+--- src/Terraria/Terraria/GameContent/TextureAssets.cs
++++ src/Avalon/Terraria/GameContent/TextureAssets.cs
+@@ -177,17 +_,17 @@
+ 		public static Asset<Texture2D>[] NpcToggle = new Asset<Texture2D>[2];
+ 		public static Asset<Texture2D>[] HbLock = new Asset<Texture2D>[2];
+ 		public static Asset<Texture2D>[] blockReplaceIcon = new Asset<Texture2D>[2];
+-		public static Asset<Texture2D>[] Buff = new Asset<Texture2D>[327];
++		public static Asset<Texture2D>[] Buff = new Asset<Texture2D>[Main.maxBuffTypes];
+-		public static Asset<Texture2D>[] Item = new Asset<Texture2D>[5088];
++		public static Asset<Texture2D>[] Item = new Asset<Texture2D>[Main.maxItemTypes];
+-		public static Asset<Texture2D>[] ItemFlame = new Asset<Texture2D>[5088];
++		public static Asset<Texture2D>[] ItemFlame = new Asset<Texture2D>[Main.maxItemTypes];
+-		public static Asset<Texture2D>[] Npc = new Asset<Texture2D>[665];
++		public static Asset<Texture2D>[] Npc = new Asset<Texture2D>[Main.maxNPCTypes];
+-		public static Asset<Texture2D>[] Projectile = new Asset<Texture2D>[954];
++		public static Asset<Texture2D>[] Projectile = new Asset<Texture2D>[Main.maxProjectileTypes];
+ 		public static Asset<Texture2D>[] Gore = new Asset<Texture2D>[1270];
+ 		public static Asset<Texture2D>[] BackPack = new Asset<Texture2D>[9];
+ 		public static Asset<Texture2D> Rain;
+ 		public static Asset<Texture2D>[] GlowMask = new Asset<Texture2D>[310];
+ 		public static Asset<Texture2D>[] Extra = new Asset<Texture2D>[243];
+-		public static Asset<Texture2D>[] HighlightMask = new Asset<Texture2D>[624];
++		public static Asset<Texture2D>[] HighlightMask = new Asset<Texture2D>[Main.maxTileSets];
+ 		public static Asset<Texture2D>[] Coin = new Asset<Texture2D>[4];
+ 		public static Asset<Texture2D>[] Cursors = new Asset<Texture2D>[18];
+ 		public static Asset<Texture2D> CursorRadial;
+@@ -200,9 +_,9 @@
+ 		public static Asset<Texture2D> PumpkinMoon;
+ 		public static Asset<Texture2D> SnowMoon;
+ 		public static Asset<Texture2D> OneDropLogo;
+-		public static Asset<Texture2D>[] Tile = new Asset<Texture2D>[624];
++		public static Asset<Texture2D>[] Tile = new Asset<Texture2D>[Main.maxTileSets];
+ 		public static Asset<Texture2D> BlackTile;
+-		public static Asset<Texture2D>[] Wall = new Asset<Texture2D>[316];
++		public static Asset<Texture2D>[] Wall = new Asset<Texture2D>[Main.maxWallTypes];
+ 		public static Asset<Texture2D>[] Background = new Asset<Texture2D>[298];
+ 		public static Asset<Texture2D>[] Cloud = new Asset<Texture2D>[37];
+ 		public static Asset<Texture2D>[] Star = new Asset<Texture2D>[4];

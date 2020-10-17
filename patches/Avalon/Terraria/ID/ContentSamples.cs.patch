@@ -1,0 +1,46 @@
+--- src/Terraria/Terraria/ID/ContentSamples.cs
++++ src/Avalon/Terraria/ID/ContentSamples.cs
+@@ -633,7 +_,7 @@
+ 
+ 			public static void SetCreativeMenuOrder() {
+ 				List<Item> list = new List<Item>();
+-				for (int i = 1; i < 5088; i++) {
++				for (int i = 1; i < Main.maxItemTypes; i++) {
+ 					Item item = new Item();
+ 					item.SetDefaults(i);
+ 					list.Add(item);
+@@ -725,7 +_,7 @@
+ 			NpcNetIdsByPersistentIds.Clear();
+ 			NpcPersistentIdsByNetIds.Clear();
+ 			NpcBestiarySortingId.Clear();
+-			for (int i = -65; i < 665; i++) {
++			for (int i = -65; i < Main.maxNPCTypes; i++) {
+ 				NPC nPC = new NPC();
+ 				nPC.SetDefaults(i);
+ 				NpcsByNetId[i] = nPC;
+@@ -737,14 +_,14 @@
+ 
+ 			ModifyNPCIds();
+ 			ProjectilesByType.Clear();
+-			for (int j = 0; j < 954; j++) {
++			for (int j = 0; j < Main.maxProjectileTypes; j++) {
+ 				Projectile projectile = new Projectile();
+ 				projectile.SetDefaults(j);
+ 				ProjectilesByType[j] = projectile;
+ 			}
+ 
+ 			ItemsByType.Clear();
+-			for (int k = 0; k < 5088; k++) {
++			for (int k = 0; k < Main.maxItemTypes; k++) {
+ 				Item item = new Item();
+ 				item.SetDefaults(k);
+ 				ItemsByType[k] = item;
+@@ -903,7 +_,7 @@
+ 			NPCSpawnParams nPCSpawnParams = default(NPCSpawnParams);
+ 			nPCSpawnParams.gameModeData = Main.RegisterdGameModes[0];
+ 			NPCSpawnParams spawnparams = nPCSpawnParams;
+-			for (int i = -65; i < 665; i++) {
++			for (int i = -65; i < Main.maxNPCTypes; i++) {
+ 				NPC nPC = new NPC();
+ 				nPC.SetDefaults(i, spawnparams);
+ 				NpcBestiaryRarityStars[i] = GetNPCBestiaryRarityStarsCount(nPC);

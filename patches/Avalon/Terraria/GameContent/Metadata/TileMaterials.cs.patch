@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/GameContent/Metadata/TileMaterials.cs
++++ src/Avalon/Terraria/GameContent/Metadata/TileMaterials.cs
+@@ -12,7 +_,7 @@
+ 		private static readonly TileMaterial[] MaterialsByTileId;
+ 
+ 		static TileMaterials() {
+-			MaterialsByTileId = new TileMaterial[624];
++			MaterialsByTileId = new TileMaterial[Main.maxTileSets];
+ 			_materialsByName = DeserializeEmbeddedResource<Dictionary<string, TileMaterial>>("Terraria.GameContent.Metadata.MaterialData.Materials.json");
+ 			TileMaterial tileMaterial = _materialsByName["Default"];
+ 			for (int i = 0; i < MaterialsByTileId.Length; i++) {

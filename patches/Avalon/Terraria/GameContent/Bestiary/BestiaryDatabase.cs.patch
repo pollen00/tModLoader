@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/GameContent/Bestiary/BestiaryDatabase.cs
++++ src/Avalon/Terraria/GameContent/Bestiary/BestiaryDatabase.cs
+@@ -49,7 +_,7 @@
+ 		}
+ 
+ 		public void Merge(ItemDropDatabase dropsDatabase) {
+-			for (int i = -65; i < 665; i++) {
++			for (int i = -65; i < Main.maxNPCTypes; i++) {
+ 				ExtractDropsForNPC(dropsDatabase, i);
+ 			}
+ 		}

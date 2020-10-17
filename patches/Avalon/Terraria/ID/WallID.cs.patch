@@ -8,6 +8,15 @@
  	{
  		public static class Sets
  		{
+@@ -17,7 +_,7 @@
+ 				public static bool[] NewWall4 = Factory.CreateBoolSet(191, 195, 203, 207, 215, 279, 283, 291, 295, 303);
+ 			}
+ 
+-			public static SetFactory Factory = new SetFactory(316);
++			public static SetFactory Factory = new SetFactory(Count);
+ 			public static bool[] CanBeConvertedToGlowingMushroom = Factory.CreateBoolSet(64, 67, 15, 247);
+ 			public static bool[] Transparent = Factory.CreateBoolSet(88, 89, 90, 91, 92, 241);
+ 			public static bool[] Corrupt = Factory.CreateBoolSet(69, 217, 220, 3);
 @@ -342,6 +_,5 @@
  		public const ushort LargeBambooBlockWall = 313;
  		public const ushort AmberStoneWallEcho = 314;

@@ -1,0 +1,40 @@
+--- src/Terraria/Terraria/Item.cs
++++ src/Avalon/Terraria/Item.cs
+@@ -40,8 +_,8 @@
+ 		public static int[] headType = new int[273];
+ 		public static int[] bodyType = new int[244];
+ 		public static int[] legType = new int[231];
+-		public static bool[] staff = new bool[5088];
++		public static bool[] staff = new bool[Main.maxItemTypes];
+-		public static bool[] claw = new bool[5088];
++		public static bool[] claw = new bool[Main.maxItemTypes];
+ 		public bool flame;
+ 		public bool mech;
+ 		public int noGrabDelay;
+@@ -44701,7 +_,7 @@
+ 				playerIndexTheItemIsReservedFor = Main.myPlayer;
+ 
+ 			ResetStats(Type);
+-			if (type >= 5088)
++			if (type >= Main.maxItemTypes)
+ 				type = 0;
+ 
+ 			if (type == 0) {
+@@ -44880,7 +_,7 @@
+ 				material = ItemID.Sets.IsAMaterial[type];
+ 
+ 			RebuildTooltip();
+-			if (type > 0 && type < 5088 && ItemID.Sets.Deprecated[type]) {
++			if (type > 0 && type < Main.maxItemTypes && ItemID.Sets.Deprecated[type]) {
+ 				netID = 0;
+ 				type = 0;
+ 				stack = 0;
+@@ -46184,7 +_,7 @@
+ 				Prefix(reader.ReadByte());
+ 			}
+ 
+-			if (type >= 5088)
++			if (type >= Main.maxItemTypes)
+ 				TurnToAir();
+ 		}
+ 

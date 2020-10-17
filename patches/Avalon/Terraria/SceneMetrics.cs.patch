@@ -1,0 +1,11 @@
+--- src/Terraria/Terraria/SceneMetrics.cs
++++ src/Avalon/Terraria/SceneMetrics.cs
+@@ -28,7 +_,7 @@
+ 		public bool CanPlayCreditsRoll;
+ 		public bool[] NPCBannerBuff = new bool[289];
+ 		public bool hasBanner;
+-		private readonly int[] _tileCounts = new int[624];
++		private readonly int[] _tileCounts = new int[Main.maxTileSets];
+ 		private readonly World _world;
+ 		private readonly List<Point> _oreFinderTileLocations = new List<Point>(512);
+ 		public int bestOre;

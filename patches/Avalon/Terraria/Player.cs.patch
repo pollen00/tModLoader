@@ -1,0 +1,141 @@
+--- src/Terraria/Terraria/Player.cs
++++ src/Avalon/Terraria/Player.cs
+@@ -693,7 +_,7 @@
+ 		public const int maxBuffs = 22;
+ 		public int[] buffType = new int[22];
+ 		public int[] buffTime = new int[22];
+-		public bool[] buffImmune = new bool[327];
++		public bool[] buffImmune = new bool[Main.maxBuffTypes];
+ 		public int heldProj = -1;
+ 		public int breathCD;
+ 		public int breathMax = 200;
+@@ -1101,8 +_,8 @@
+ 		public bool oldAdjWater;
+ 		public bool oldAdjHoney;
+ 		public bool oldAdjLava;
+-		public bool[] adjTile = new bool[624];
++		public bool[] adjTile = new bool[Main.maxTileSets];
+-		public bool[] oldAdjTile = new bool[624];
++		public bool[] oldAdjTile = new bool[Main.maxTileSets];
+ 		public static int defaultItemGrabRange = 42;
+ 		private static float itemGrabSpeed = 0.45f;
+ 		private static float itemGrabSpeedMax = 4f;
+@@ -1300,8 +_,8 @@
+ 		public int cGingerBeard;
+ 		public int cMinion;
+ 		public int cLeinShampoo;
+-		public int[] ownedProjectileCounts = new int[954];
++		public int[] ownedProjectileCounts = new int[Main.maxProjectileTypes];
+-		public bool[] npcTypeNoAggro = new bool[665];
++		public bool[] npcTypeNoAggro = new bool[Main.maxNPCTypes];
+ 		public int lastPortalColorIndex;
+ 		public int _portalPhysicsTime;
+ 		public bool portalPhysicsFlag;
+@@ -17843,7 +_,7 @@
+ 					AddBuff(194, 2, quiet: false);
+ 			}
+ 
+-			for (int num26 = 0; num26 < 327; num26++) {
++			for (int num26 = 0; num26 < Main.maxBuffTypes; num26++) {
+ 				buffImmune[num26] = false;
+ 			}
+ 
+@@ -22589,7 +_,7 @@
+ 									bool flag13 = false;
+ 									if (Chest.IsLocked(num69, num70)) {
+ 										int type2 = Main.tile[num69, num70].type;
+-										int num72 = 327;
++										int num72 = Main.maxBuffTypes;
+ 										switch (type2) {
+ 											case 21:
+ 												if (Main.tile[num69, num70].frameX >= 144 && Main.tile[num69, num70].frameX <= 178)
+@@ -24901,7 +_,7 @@
+ 		public void AdjTiles() {
+ 			int num = 4;
+ 			int num2 = 3;
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < Main.maxTileSets; i++) {
+ 				oldAdjTile[i] = adjTile[i];
+ 				adjTile[i] = false;
+ 			}
+@@ -24959,7 +_,7 @@
+ 				return;
+ 
+ 			bool flag = false;
+-			for (int l = 0; l < 624; l++) {
++			for (int l = 0; l < Main.maxTileSets; l++) {
+ 				if (oldAdjTile[l] != adjTile[l]) {
+ 					flag = true;
+ 					break;
+@@ -29768,7 +_,7 @@
+ 				if (whoAmI == Main.myPlayer && gravDir == 1f && item.mountType != -1 && mount.CanMount(item.mountType, this))
+ 					mount.SetMount(item.mountType, this);
+ 
+-				if ((item.shoot <= 0 || !ProjectileID.Sets.MinionTargettingFeature[item.shoot] || altFunctionUse != 2) && flag3 && whoAmI == Main.myPlayer && item.shoot >= 0 && item.shoot < 954 && (ProjectileID.Sets.LightPet[item.shoot] || Main.projPet[item.shoot]))
++				if ((item.shoot <= 0 || !ProjectileID.Sets.MinionTargettingFeature[item.shoot] || altFunctionUse != 2) && flag3 && whoAmI == Main.myPlayer && item.shoot >= 0 && item.shoot < Main.maxProjectileTypes && (ProjectileID.Sets.LightPet[item.shoot] || Main.projPet[item.shoot]))
+ 					FreeUpPetsAndMinions(item);
+ 
+ 				if (flag3)
+@@ -37822,7 +_,7 @@
+ 								if (num >= 58) {
+ 									for (int num7 = 0; num7 < 58; num7++) {
+ 										int num8 = binaryReader.ReadInt32();
+-										if (num8 >= 5088) {
++										if (num8 >= Main.maxItemTypes) {
+ 											player.inventory[num7].netDefaults(0);
+ 											binaryReader.ReadInt32();
+ 											binaryReader.ReadByte();
+@@ -37841,7 +_,7 @@
+ 								else {
+ 									for (int num9 = 0; num9 < 48; num9++) {
+ 										int num10 = binaryReader.ReadInt32();
+-										if (num10 >= 5088) {
++										if (num10 >= Main.maxItemTypes) {
+ 											player.inventory[num9].netDefaults(0);
+ 											binaryReader.ReadInt32();
+ 											binaryReader.ReadByte();
+@@ -37859,7 +_,7 @@
+ 										for (int num11 = 0; num11 < 5; num11++) {
+ 											if (num11 != 1) {
+ 												int num12 = binaryReader.ReadInt32();
+-												if (num12 >= 5088) {
++												if (num12 >= Main.maxItemTypes) {
+ 													player.miscEquips[num11].netDefaults(0);
+ 													binaryReader.ReadByte();
+ 												}
+@@ -37869,7 +_,7 @@
+ 												}
+ 
+ 												num12 = binaryReader.ReadInt32();
+-												if (num12 >= 5088) {
++												if (num12 >= Main.maxItemTypes) {
+ 													player.miscDyes[num11].netDefaults(0);
+ 													binaryReader.ReadByte();
+ 												}
+@@ -37883,7 +_,7 @@
+ 									else {
+ 										for (int num13 = 0; num13 < 5; num13++) {
+ 											int num14 = binaryReader.ReadInt32();
+-											if (num14 >= 5088) {
++											if (num14 >= Main.maxItemTypes) {
+ 												player.miscEquips[num13].netDefaults(0);
+ 												binaryReader.ReadByte();
+ 											}
+@@ -37893,7 +_,7 @@
+ 											}
+ 
+ 											num14 = binaryReader.ReadInt32();
+-											if (num14 >= 5088) {
++											if (num14 >= Main.maxItemTypes) {
+ 												player.miscDyes[num13].netDefaults(0);
+ 												binaryReader.ReadByte();
+ 											}
+@@ -38262,7 +_,7 @@
+ 			grappling[0] = -1;
+ 			statManaMax = 20;
+ 			extraAccessory = false;
+-			for (int n = 0; n < 624; n++) {
++			for (int n = 0; n < Main.maxTileSets; n++) {
+ 				adjTile[n] = false;
+ 				oldAdjTile[n] = false;
+ 			}

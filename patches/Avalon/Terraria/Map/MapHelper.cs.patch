@@ -1,0 +1,140 @@
+--- src/Terraria/Terraria/Map/MapHelper.cs
++++ src/Avalon/Terraria/Map/MapHelper.cs
+@@ -117,8 +_,8 @@
+ 		public static bool noStatusText = false;
+ 
+ 		public static void Initialize() {
+-			Color[][] array = new Color[624][];
++			Color[][] array = new Color[Main.maxTileSets][];
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < Main.maxTileSets; i++) {
+ 				array[i] = new Color[12];
+ 			}
+ 
+@@ -998,8 +_,8 @@
+ 				new Color(254, 194, 20)
+ 			};
+ 
+-			Color[][] array3 = new Color[316][];
++			Color[][] array3 = new Color[Main.maxWallTypes][];
+-			for (int k = 0; k < 316; k++) {
++			for (int k = 0; k < Main.maxWallTypes; k++) {
+ 				array3[k] = new Color[2];
+ 			}
+ 
+@@ -1352,8 +_,8 @@
+ 
+ 			Color color9 = new Color(50, 44, 38);
+ 			int num7 = 0;
+-			tileOptionCounts = new int[624];
++			tileOptionCounts = new int[Main.maxTileSets];
+-			for (int num8 = 0; num8 < 624; num8++) {
++			for (int num8 = 0; num8 < Main.maxTileSets; num8++) {
+ 				Color[] array7 = array[num8];
+ 				int num9;
+ 				for (num9 = 0; num9 < 12 && !(array7[num9] == Color.Transparent); num9++) {
+@@ -1363,8 +_,8 @@
+ 				num7 += num9;
+ 			}
+ 
+-			wallOptionCounts = new int[316];
++			wallOptionCounts = new int[Main.maxWallTypes];
+-			for (int num10 = 0; num10 < 316; num10++) {
++			for (int num10 = 0; num10 < Main.maxWallTypes; num10++) {
+ 				Color[] array8 = array3[num10];
+ 				int num11;
+ 				for (num11 = 0; num11 < 2 && !(array8[num11] == Color.Transparent); num11++) {
+@@ -1378,8 +_,8 @@
+ 			colorLookup = new Color[num7];
+ 			colorLookup[0] = Color.Transparent;
+ 			ushort num12 = tilePosition = 1;
+-			tileLookup = new ushort[624];
++			tileLookup = new ushort[Main.maxTileSets];
+-			for (int num13 = 0; num13 < 624; num13++) {
++			for (int num13 = 0; num13 < Main.maxTileSets; num13++) {
+ 				if (tileOptionCounts[num13] > 0) {
+ 					_ = array[num13];
+ 					tileLookup[num13] = num12;
+@@ -1394,9 +_,9 @@
+ 			}
+ 
+ 			wallPosition = num12;
+-			wallLookup = new ushort[316];
++			wallLookup = new ushort[Main.maxWallTypes];
+ 			wallRangeStart = num12;
+-			for (int num15 = 0; num15 < 316; num15++) {
++			for (int num15 = 0; num15 < Main.maxWallTypes; num15++) {
+ 				if (wallOptionCounts[num15] > 0) {
+ 					_ = array3[num15];
+ 					wallLookup[num15] = num12;
+@@ -1555,7 +_,7 @@
+ 					int num4 = tile.liquidType();
+ 					num3 = liquidPosition + num4;
+ 				}
+-				else if (tile.wall > 0 && tile.wall < 316) {
++				else if (tile.wall > 0 && tile.wall < Main.maxWallTypes) {
+ 					int wall = tile.wall;
+ 					num3 = wallLookup[wall];
+ 					num = tile.wallColor();
+@@ -2175,8 +_,8 @@
+ 						binaryWriter.Write(Main.worldID);
+ 						binaryWriter.Write(Main.maxTilesY);
+ 						binaryWriter.Write(Main.maxTilesX);
+-						binaryWriter.Write((short)624);
++						binaryWriter.Write((short)Main.maxTileSets);
+-						binaryWriter.Write((short)316);
++						binaryWriter.Write((short)Main.maxWallTypes);
+ 						binaryWriter.Write((short)3);
+ 						binaryWriter.Write((short)256);
+ 						binaryWriter.Write((short)256);
+@@ -2184,7 +_,7 @@
+ 						byte b = 1;
+ 						byte b2 = 0;
+ 						int i;
+-						for (i = 0; i < 624; i++) {
++						for (i = 0; i < Main.maxTileSets; i++) {
+ 							if (tileOptionCounts[i] != 1)
+ 								b2 = (byte)(b2 | b);
+ 
+@@ -2204,7 +_,7 @@
+ 						i = 0;
+ 						b = 1;
+ 						b2 = 0;
+-						for (; i < 316; i++) {
++						for (; i < Main.maxWallTypes; i++) {
+ 							if (wallOptionCounts[i] != 1)
+ 								b2 = (byte)(b2 | b);
+ 
+@@ -2221,12 +_,12 @@
+ 						if (b != 1)
+ 							binaryWriter.Write(b2);
+ 
+-						for (i = 0; i < 624; i++) {
++						for (i = 0; i < Main.maxTileSets; i++) {
+ 							if (tileOptionCounts[i] != 1)
+ 								binaryWriter.Write((byte)tileOptionCounts[i]);
+ 						}
+ 
+-						for (i = 0; i < 316; i++) {
++						for (i = 0; i < Main.maxWallTypes; i++) {
+ 							if (wallOptionCounts[i] != 1)
+ 								binaryWriter.Write((byte)wallOptionCounts[i]);
+ 						}
+@@ -2619,7 +_,7 @@
+ 			ushort num12 = 1;
+ 			ushort num13 = 1;
+ 			ushort num14 = num13;
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < Main.maxTileSets; i++) {
+ 				if (i < num4) {
+ 					int num15 = array3[i];
+ 					int num16 = tileOptionCounts[i];
+@@ -2638,7 +_,7 @@
+ 			}
+ 
+ 			ushort num17 = num13;
+-			for (int i = 0; i < 316; i++) {
++			for (int i = 0; i < Main.maxWallTypes; i++) {
+ 				if (i < num5) {
+ 					int num18 = array4[i];
+ 					int num19 = wallOptionCounts[i];

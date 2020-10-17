@@ -1,0 +1,22 @@
+--- src/Terraria/Terraria/ObjectData/TileObjectData.cs
++++ src/Avalon/Terraria/ObjectData/TileObjectData.cs
+@@ -1286,7 +_,7 @@
+ 			HookPostPlaceEveryone = default(PlacementHook);
+ 			HookPostPlaceMyPlayer = default(PlacementHook);
+ 			HookPlaceOverride = default(PlacementHook);
+-			SubTiles = new List<TileObjectData>(624);
++			SubTiles = new List<TileObjectData>(Main.maxTileSets);
+ 			_tileObjectBase = new TileObjectBaseModule();
+ 			_hasOwnTileObjectBase = true;
+ 			Width = 1;
+@@ -1509,8 +_,8 @@
+ 		public static void Initialize() {
+ 			_baseObject = new TileObjectData();
+ 			_baseObject.SetupBaseObject();
+-			_data = new List<TileObjectData>(624);
++			_data = new List<TileObjectData>(Main.maxTileSets);
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < Main.maxTileSets; i++) {
+ 				_data.Add(null);
+ 			}
+ 

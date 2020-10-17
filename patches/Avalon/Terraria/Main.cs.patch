@@ -1,0 +1,342 @@
+--- src/Terraria/Terraria/Main.cs
++++ src/Avalon/Terraria/Main.cs
+@@ -298,12 +_,12 @@
+ 		public static int dedServCount2;
+ 		public static bool superFast = false;
+ 		public const int offLimitBorderTiles = 40;
+-		public const int maxItemTypes = 5088;
++		public const int maxItemTypes = ItemID.Count;
+-		public const int maxProjectileTypes = 954;
++		public const int maxProjectileTypes = ProjectileID.Count;
+-		public const int maxNPCTypes = 665;
++		public const int maxNPCTypes = NPCID.Count;
+-		public const int maxTileSets = 624;
++		public const int maxTileSets = TileID.Count;
+-		public const int maxWallTypes = 316;
++		public const int maxWallTypes = WallID.Count;
+-		public const int maxBuffTypes = 327;
++		public const int maxBuffTypes = BuffID.Count;
+ 		public const int maxGlowMasks = 310;
+ 		public const int maxExtras = 243;
+ 		public const int maxGoreTypes = 1270;
+@@ -415,7 +_,7 @@
+ 		public static bool stopTimeOuts = false;
+ 		public static bool showSpam = false;
+ 		public static bool showItemOwner = false;
+-		public static bool[] townNPCCanSpawn = new bool[665];
++		public static bool[] townNPCCanSpawn = new bool[maxNPCTypes];
+ 		public static int musicBox2 = -1;
+ 		public static int musicBoxNotModifiedByVolume = -1;
+ 		public static byte HealthBarDrawSettings = 1;
+@@ -522,17 +_,17 @@
+ 		public static int buffScanAreaWidth = (maxScreenW + 800) / 16 - 1;
+ 		public static int buffScanAreaHeight = (maxScreenH + 800) / 16 - 1;
+ 		public static float musicPitch = 0f;
+-		public static bool[] projHostile = new bool[954];
++		public static bool[] projHostile = new bool[maxProjectileTypes];
+-		public static bool[] projHook = new bool[954];
++		public static bool[] projHook = new bool[maxProjectileTypes];
+-		public static bool[] pvpBuff = new bool[327];
++		public static bool[] pvpBuff = new bool[maxBuffTypes];
+-		public static bool[] persistentBuff = new bool[327];
++		public static bool[] persistentBuff = new bool[maxBuffTypes];
+-		public static bool[] vanityPet = new bool[327];
++		public static bool[] vanityPet = new bool[maxBuffTypes];
+-		public static bool[] lightPet = new bool[327];
++		public static bool[] lightPet = new bool[maxBuffTypes];
+-		public static bool[] meleeBuff = new bool[327];
++		public static bool[] meleeBuff = new bool[maxBuffTypes];
+-		public static bool[] debuff = new bool[327];
++		public static bool[] debuff = new bool[maxBuffTypes];
+-		public static bool[] buffNoSave = new bool[327];
++		public static bool[] buffNoSave = new bool[maxBuffTypes];
+-		public static bool[] buffNoTimeDisplay = new bool[327];
++		public static bool[] buffNoTimeDisplay = new bool[maxBuffTypes];
+-		public static bool[] buffDoubleApply = new bool[327];
++		public static bool[] buffDoubleApply = new bool[maxBuffTypes];
+ 		public static int maxMP = 10;
+ 		public static string[] recentWorld = new string[maxMP];
+ 		public static string[] recentIP = new string[maxMP];
+@@ -642,7 +_,7 @@
+ 		public static bool armorHide;
+ 		public static float craftingAlpha = 1f;
+ 		public static float armorAlpha = 1f;
+-		public static float[] buffAlpha = new float[327];
++		public static float[] buffAlpha = new float[maxBuffTypes];
+ 		public static bool hardMode;
+ 		public float chestLootScale = 1f;
+ 		public bool chestLootHover;
+@@ -713,7 +_,7 @@
+ 		public static int slimeWarningTime;
+ 		public static int slimeWarningDelay = 420;
+ 		public static float slimeRainNPCSlots = 0.65f;
+-		public static bool[] slimeRainNPC = new bool[665];
++		public static bool[] slimeRainNPC = new bool[maxNPCTypes];
+ 		public static double slimeRainTime;
+ 		public static bool slimeRain;
+ 		public static int slimeRainKillCount;
+@@ -794,8 +_,8 @@
+ 		public static int BartenderHelpTextIndex = 0;
+ 		public static bool autoGen;
+ 		public static bool autoPause = false;
+-		public static int[] projFrames = new int[954];
++		public static int[] projFrames = new int[maxProjectileTypes];
+-		public static bool[] projPet = new bool[954];
++		public static bool[] projPet = new bool[maxProjectileTypes];
+ 		public static float demonTorch = 1f;
+ 		public static int demonTorchDir = 1;
+ 		public static float martianLight = 1f;
+@@ -850,46 +_,46 @@
+ 		public static float ambientVolume = 1f;
+ 		public static float soundVolume = 1f;
+ 		public static ServerMode MenuServerMode = ServerMode.Lobby | ServerMode.FriendsCanJoin;
+-		public static bool[] tileLighted = new bool[624];
++		public static bool[] tileLighted = new bool[maxTileSets];
+-		public static bool[] tileMergeDirt = new bool[624];
++		public static bool[] tileMergeDirt = new bool[maxTileSets];
+-		public static bool[] tileCut = new bool[624];
++		public static bool[] tileCut = new bool[maxTileSets];
+-		public static bool[] tileAlch = new bool[624];
++		public static bool[] tileAlch = new bool[maxTileSets];
+-		public static int[] tileShine = new int[624];
++		public static int[] tileShine = new int[maxTileSets];
+-		public static bool[] tileShine2 = new bool[624];
++		public static bool[] tileShine2 = new bool[maxTileSets];
+-		public static bool[] wallHouse = new bool[316];
++		public static bool[] wallHouse = new bool[maxWallTypes];
+-		public static bool[] wallDungeon = new bool[316];
++		public static bool[] wallDungeon = new bool[maxWallTypes];
+-		public static bool[] wallLight = new bool[316];
++		public static bool[] wallLight = new bool[maxWallTypes];
+-		public static int[] wallBlend = new int[316];
++		public static int[] wallBlend = new int[maxWallTypes];
+-		public static bool[] tileStone = new bool[624];
++		public static bool[] tileStone = new bool[maxTileSets];
+-		public static bool[] tileAxe = new bool[624];
++		public static bool[] tileAxe = new bool[maxTileSets];
+-		public static bool[] tileHammer = new bool[624];
++		public static bool[] tileHammer = new bool[maxTileSets];
+-		public static bool[] tileWaterDeath = new bool[624];
++		public static bool[] tileWaterDeath = new bool[maxTileSets];
+-		public static bool[] tileLavaDeath = new bool[624];
++		public static bool[] tileLavaDeath = new bool[maxTileSets];
+-		public static bool[] tileTable = new bool[624];
++		public static bool[] tileTable = new bool[maxTileSets];
+-		public static bool[] tileBlockLight = new bool[624];
++		public static bool[] tileBlockLight = new bool[maxTileSets];
+-		public static bool[] tileNoSunLight = new bool[624];
++		public static bool[] tileNoSunLight = new bool[maxTileSets];
+-		public static bool[] tileDungeon = new bool[624];
++		public static bool[] tileDungeon = new bool[maxTileSets];
+-		public static bool[] tileSpelunker = new bool[624];
++		public static bool[] tileSpelunker = new bool[maxTileSets];
+-		public static bool[] tileSolidTop = new bool[624];
++		public static bool[] tileSolidTop = new bool[maxTileSets];
+-		public static bool[] tileSolid = new bool[624];
++		public static bool[] tileSolid = new bool[maxTileSets];
+-		public static bool[] tileBouncy = new bool[624];
++		public static bool[] tileBouncy = new bool[maxTileSets];
+-		public static short[] tileOreFinderPriority = new short[624];
++		public static short[] tileOreFinderPriority = new short[maxTileSets];
+-		public static byte[] tileLargeFrames = new byte[624];
++		public static byte[] tileLargeFrames = new byte[maxTileSets];
+-		public static byte[] wallLargeFrames = new byte[316];
++		public static byte[] wallLargeFrames = new byte[maxWallTypes];
+-		public static bool[] tileRope = new bool[624];
++		public static bool[] tileRope = new bool[maxTileSets];
+-		public static bool[] tileBrick = new bool[624];
++		public static bool[] tileBrick = new bool[maxTileSets];
+-		public static bool[] tileMoss = new bool[624];
++		public static bool[] tileMoss = new bool[maxTileSets];
+-		public static bool[] tileNoAttach = new bool[624];
++		public static bool[] tileNoAttach = new bool[maxTileSets];
+-		public static bool[] tileNoFail = new bool[624];
++		public static bool[] tileNoFail = new bool[maxTileSets];
+-		public static bool[] tileCracked = new bool[624];
++		public static bool[] tileCracked = new bool[maxTileSets];
+-		public static bool[] tileObsidianKill = new bool[624];
++		public static bool[] tileObsidianKill = new bool[maxTileSets];
+-		public static bool[] tileFrameImportant = new bool[624];
++		public static bool[] tileFrameImportant = new bool[maxTileSets];
+-		public static bool[] tilePile = new bool[624];
++		public static bool[] tilePile = new bool[maxTileSets];
+-		public static bool[] tileBlendAll = new bool[624];
++		public static bool[] tileBlendAll = new bool[maxTileSets];
+-		public static short[] tileGlowMask = new short[624];
++		public static short[] tileGlowMask = new short[maxTileSets];
+-		public static bool[] tileContainer = new bool[624];
++		public static bool[] tileContainer = new bool[maxTileSets];
+-		public static bool[] tileSign = new bool[624];
++		public static bool[] tileSign = new bool[maxTileSets];
+-		public static bool[][] tileMerge = new bool[624][];
++		public static bool[][] tileMerge = new bool[maxTileSets][];
+ 		public static int cageFrames = 25;
+ 		public static bool critterCage;
+ 		public static int[] bunnyCageFrame = new int[cageFrames];
+@@ -959,13 +_,13 @@
+ 		public static int[] owlCageFrameCounter = new int[cageFrames];
+ 		public static int[] grasshopperCageFrame = new int[cageFrames];
+ 		public static int[] grasshopperCageFrameCounter = new int[cageFrames];
+-		public static bool[] tileSand = new bool[624];
++		public static bool[] tileSand = new bool[maxTileSets];
+-		public static bool[] tileFlame = new bool[624];
++		public static bool[] tileFlame = new bool[maxTileSets];
+-		public static bool[] npcCatchable = new bool[665];
++		public static bool[] npcCatchable = new bool[maxNPCTypes];
+-		public static int[] tileFrame = new int[624];
++		public static int[] tileFrame = new int[maxTileSets];
+-		public static int[] tileFrameCounter = new int[624];
++		public static int[] tileFrameCounter = new int[maxTileSets];
+-		public static byte[] wallFrame = new byte[316];
++		public static byte[] wallFrame = new byte[maxWallTypes];
+-		public static byte[] wallFrameCounter = new byte[316];
++		public static byte[] wallFrameCounter = new byte[maxWallTypes];
+ 		public static int[] backgroundWidth = new int[298];
+ 		public static int[] backgroundHeight = new int[298];
+ 		public static HairstyleUnlocksHelper Hairstyles = new HairstyleUnlocksHelper();
+@@ -987,7 +_,7 @@
+ 		public static Sign[] sign = new Sign[1000];
+ 		public static int[] itemFrame = new int[401];
+ 		public static int[] itemFrameCounter = new int[401];
+-		public static DrawAnimation[] itemAnimations = new DrawAnimation[5088];
++		public static DrawAnimation[] itemAnimations = new DrawAnimation[maxItemTypes];
+ 		private static DrawAnimation _coinOnWorldAnimation = new DrawAnimationVertical(6, 8);
+ 		private static DrawAnimation _monkStaffT3OnWorldAnimation = new DrawAnimationVertical(5, 3);
+ 		public static List<int> itemAnimationsRegistered = new List<int>();
+@@ -1185,7 +_,7 @@
+ 		public static float invasionProgressAlpha;
+ 		public static bool HasInteractibleObjectThatIsNotATile = false;
+ 		public int currentNPCShowingChatBubble = -1;
+-		public static int[] npcFrameCount = new int[665] {
++		public static int[] npcFrameCount = new int[maxNPCTypes] {
+ 			1,
+ 			2,
+ 			2,
+@@ -2742,7 +_,7 @@
+ 		}
+ 
+ 		public static void SetupTileMerge() {
+-			int num = 624;
++			int num = maxTileSets;
+ 			tileMerge = new bool[num][];
+ 			for (int i = 0; i < tileMerge.Length; i++) {
+ 				tileMerge[i] = new bool[num];
+@@ -4940,7 +_,7 @@
+ 			Initialize_TileAndNPCData1();
+ 			Initialize_TileAndNPCData2();
+ 			Initialize_Items();
+-			for (int i = 1; i < 954; i++) {
++			for (int i = 1; i < maxProjectileTypes; i++) {
+ 				Projectile obj = new Projectile();
+ 				obj.SetDefaults(i);
+ 				if (obj.hostile)
+@@ -5061,7 +_,7 @@
+ 		}
+ 
+ 		private static void Initialize_Items() {
+-			for (int i = 0; i < 5088; i++) {
++			for (int i = 0; i < maxItemTypes; i++) {
+ 				Item item = new Item();
+ 				item.SetDefaults(i);
+ 				if (item.headSlot > 0)
+@@ -6285,7 +_,7 @@
+ 			tileLighted[318] = true;
+ 			tileFrameImportant[493] = true;
+ 			tileLavaDeath[493] = true;
+-			for (int j = 0; j < 624; j++) {
++			for (int j = 0; j < maxTileSets; j++) {
+ 				if (tileLavaDeath[j])
+ 					tileObsidianKill[j] = true;
+ 			}
+@@ -6345,7 +_,7 @@
+ 			tileLavaDeath[494] = true;
+ 			tileFrameImportant[455] = true;
+ 			tileFrameImportant[412] = true;
+-			for (int k = 0; k < 316; k++) {
++			for (int k = 0; k < maxWallTypes; k++) {
+ 				switch (k) {
+ 					case 20:
+ 						wallBlend[k] = 14;
+@@ -6438,7 +_,7 @@
+ 			tileFrameImportant[389] = true;
+ 			tileLavaDeath[389] = true;
+ 			tileNoSunLight[389] = true;
+-			for (int l = 0; l < 624; l++) {
++			for (int l = 0; l < maxTileSets; l++) {
+ 				if (tileSolid[l])
+ 					tileNoSunLight[l] = true;
+ 
+@@ -6463,11 +_,11 @@
+ 		}
+ 
+ 		private static void Initialize_TileAndNPCData1() {
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < maxTileSets; i++) {
+ 				tileGlowMask[i] = -1;
+ 			}
+ 
+-			for (int j = 0; j < 954; j++) {
++			for (int j = 0; j < maxProjectileTypes; j++) {
+ 				projFrames[j] = 1;
+ 			}
+ 
+@@ -7242,7 +_,7 @@
+ 			tilePile[331] = true;
+ 			tilePile[332] = true;
+ 			tilePile[333] = true;
+-			for (int m = 0; m < 665; m++) {
++			for (int m = 0; m < maxNPCTypes; m++) {
+ 				npcCatchable[m] = false;
+ 			}
+ 
+@@ -8181,7 +_,7 @@
+ 			wallLight[245] = true;
+ 			wallLight[315] = true;
+ 			wallLight[168] = true;
+-			for (int num4 = 0; num4 < 316; num4++) {
++			for (int num4 = 0; num4 < maxWallTypes; num4++) {
+ 				wallDungeon[num4] = false;
+ 			}
+ 
+@@ -16406,7 +_,7 @@
+ 			Microsoft.Xna.Framework.Rectangle rectangle = new Microsoft.Xna.Framework.Rectangle((int)screenPosition.X - 800, (int)screenPosition.Y - 800, screenWidth + 1600, screenHeight + 1600);
+ 			for (int num = 199; num >= 0; num--) {
+ 				try {
+-					if (npc[num].active && npc[num].type > 0 && npc[num].type < 665 && !npc[num].hide) {
++					if (npc[num].active && npc[num].type > 0 && npc[num].type < maxNPCTypes && !npc[num].hide) {
+ 						npc[num].position += npc[num].netOffset;
+ 						if (npc[num].behindTiles == behindTiles) {
+ 							if (npc[num].type == 125 || npc[num].type == 126) {
+@@ -20353,7 +_,7 @@
+ 				return;
+ 
+ 			int num16 = (int)n.ai[2];
+-			if (num16 <= 0 || num16 > 5088)
++			if (num16 <= 0 || num16 > maxItemTypes)
+ 				return;
+ 
+ 			instance.LoadItem(num16);
+@@ -39163,10 +_,12 @@
+ 					if (num107 == 3)
+ 						num109 = 2;
+ 
++					string avalonVer = $"Exxo Avalon: Origins v1.0.0.0";
++
+-					Vector2 origin2 = FontAssets.MouseText.Value.MeasureString(versionNumber);
++					Vector2 origin2 = FontAssets.MouseText.Value.MeasureString(avalonVer);
+ 					origin2.X *= 0.5f;
+ 					origin2.Y *= 0.5f;
+-					spriteBatch.DrawString(FontAssets.MouseText.Value, versionNumber, new Vector2(origin2.X + (float)num108 + 10f, (float)screenHeight - origin2.Y + (float)num109 - 2f), color12, 0f, origin2, 1f, SpriteEffects.None, 0f);
++					spriteBatch.DrawString(FontAssets.MouseText.Value, avalonVer, new Vector2(origin2.X + (float)num108 + 10f, (float)screenHeight - origin2.Y + (float)num109 - 2f), color12, 0f, origin2, 1f, SpriteEffects.None, 0f);
+ 				}
+ 			}
+ 
+@@ -49946,7 +_,7 @@
+ 					num++;
+ 			}
+ 
+-			for (int j = 0; j < 665; j++) {
++			for (int j = 0; j < maxNPCTypes; j++) {
+ 				townNPCCanSpawn[j] = false;
+ 			}
+ 

@@ -1,0 +1,40 @@
+--- src/Terraria/Terraria/Lang.cs
++++ src/Avalon/Terraria/Lang.cs
+@@ -35,13 +_,13 @@
+ 		public static LocalizedText[] chestType2 = new LocalizedText[14];
+ 		public static LocalizedText[] prefix = new LocalizedText[85];
+ 		public static LocalizedText[] _mapLegendCache;
+-		private static LocalizedText[] _itemNameCache = new LocalizedText[5088];
++		private static LocalizedText[] _itemNameCache = new LocalizedText[Main.maxItemTypes];
+-		private static LocalizedText[] _projectileNameCache = new LocalizedText[954];
++		private static LocalizedText[] _projectileNameCache = new LocalizedText[Main.maxProjectileTypes];
+-		private static LocalizedText[] _npcNameCache = new LocalizedText[665];
++		private static LocalizedText[] _npcNameCache = new LocalizedText[Main.maxNPCTypes];
+ 		private static LocalizedText[] _negativeNpcNameCache = new LocalizedText[65];
+-		private static LocalizedText[] _buffNameCache = new LocalizedText[327];
++		private static LocalizedText[] _buffNameCache = new LocalizedText[Main.maxBuffTypes];
+-		private static LocalizedText[] _buffDescriptionCache = new LocalizedText[327];
++		private static LocalizedText[] _buffDescriptionCache = new LocalizedText[Main.maxBuffTypes];
+-		private static ItemTooltip[] _itemTooltipCache = new ItemTooltip[5088];
++		private static ItemTooltip[] _itemTooltipCache = new ItemTooltip[Main.maxItemTypes];
+ 		private static LocalizedText[] _emojiNameCache = new LocalizedText[146];
+ 
+ 		public static string GetMapObjectName(int id) {
+@@ -110,7 +_,7 @@
+ 		public static string GetNPCNameValue(int netID) => GetNPCName(netID).Value;
+ 
+ 		public static LocalizedText GetNPCName(int netID) {
+-			if (netID > 0 && netID < 665)
++			if (netID > 0 && netID < Main.maxNPCTypes)
+ 				return _npcNameCache[netID];
+ 
+ 			if (netID < 0 && -netID - 1 < _negativeNpcNameCache.Length)
+@@ -123,7 +_,7 @@
+ 
+ 		public static LocalizedText GetItemName(int id) {
+ 			id = ItemID.FromNetId((short)id);
+-			if (id > 0 && id < 5088 && _itemNameCache[id] != null)
++			if (id > 0 && id < Main.maxItemTypes && _itemNameCache[id] != null)
+ 				return _itemNameCache[id];
+ 
+ 			return LocalizedText.Empty;

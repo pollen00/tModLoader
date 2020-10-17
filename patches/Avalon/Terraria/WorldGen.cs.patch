@@ -1,0 +1,158 @@
+--- src/Terraria/Terraria/WorldGen.cs
++++ src/Avalon/Terraria/WorldGen.cs
+@@ -698,7 +_,7 @@
+ 		public static ushort mossTile = 179;
+ 		public static ushort mossWall = 54;
+ 		public static bool[] gem = new bool[6];
+-		public static int[] tileCounts = new int[624];
++		public static int[] tileCounts = new int[Main.maxTileSets];
+ 		public static int totalEvil;
+ 		public static int totalBlood;
+ 		public static int totalGood;
+@@ -779,7 +_,7 @@
+ 		public static int roomY1;
+ 		public static int roomY2;
+ 		public static bool canSpawn;
+-		public static bool[] houseTile = new bool[624];
++		public static bool[] houseTile = new bool[Main.maxTileSets];
+ 		public static int bestX;
+ 		public static int bestY;
+ 		public static int hiScore;
+@@ -1174,7 +_,7 @@
+ 				}
+ 			}
+ 
+-			for (int j = 0; j < 665; j++) {
++			for (int j = 0; j < Main.maxNPCTypes; j++) {
+ 				if (!Main.townNPCCanSpawn[j] || !CheckSpecialTownNPCSpawningConditions(j))
+ 					continue;
+ 
+@@ -1214,7 +_,7 @@
+ 			}
+ 
+ 			int num2 = -1;
+-			for (int j = 0; j < 665; j++) {
++			for (int j = 0; j < Main.maxNPCTypes; j++) {
+ 				if (!Main.townNPCCanSpawn[j] || !CheckSpecialTownNPCSpawningConditions(j))
+ 					continue;
+ 
+@@ -1596,9 +_,9 @@
+ 		}
+ 
+ 		public static void CheckAchievement_RealEstate() {
+-			bool[] array = new bool[665];
++			bool[] array = new bool[Main.maxNPCTypes];
+ 			for (int i = 0; i < 200; i++) {
+-				if (Main.npc[i].active && Main.npc[i].type >= 0 && Main.npc[i].type < 665)
++				if (Main.npc[i].active && Main.npc[i].type >= 0 && Main.npc[i].type < Main.maxNPCTypes)
+ 					array[Main.npc[i].type] = true;
+ 			}
+ 
+@@ -1801,7 +_,7 @@
+ 			if (num7 >= Main.maxTilesY - 5)
+ 				num7 = Main.maxTilesY - 6;
+ 
+-			int[] tileTypeCounts = new int[624];
++			int[] tileTypeCounts = new int[Main.maxTileSets];
+ 			CountTileTypesInArea(tileTypeCounts, num4 + 1, num5 - 1, num6 + 2, num7 + 1);
+ 			int num8 = -GetTileTypeCountByCategory(tileTypeCounts, TileScanGroup.TotalGoodEvil);
+ 			if (num8 < 50)
+@@ -1934,7 +_,7 @@
+ 			roomY2 = y;
+ 			numRoomTiles = 0;
+ 			roomCeilingsCount = 0;
+-			for (int i = 0; i < 624; i++) {
++			for (int i = 0; i < Main.maxTileSets; i++) {
+ 				houseTile[i] = false;
+ 			}
+ 
+@@ -29785,7 +_,7 @@
+ 						case 186:
+ 							if (frameX < 864)
+ 								break;
+-							if (frameX <= 954) {
++							if (frameX <= Main.maxProjectileTypes) {
+ 								Item.NewItem(i * 16, j * 16, 32, 32, 71, genRand.Next(20, 100));
+ 								Item.NewItem(i * 16, j * 16, 32, 32, 71, genRand.Next(30, 100));
+ 								Item.NewItem(i * 16, j * 16, 32, 32, 71, genRand.Next(40, 100));
+@@ -31181,7 +_,7 @@
+ 		}
+ 
+ 		public static bool PlaceObject(int x, int y, int type, bool mute = false, int style = 0, int alternate = 0, int random = -1, int direction = -1) {
+-			if (type >= 624)
++			if (type >= Main.maxTileSets)
+ 				return false;
+ 
+ 			if (!TileObject.CanPlace(x, y, type, style, direction, out TileObject objectData))
+@@ -34346,7 +_,7 @@
+ 					int wall = Main.tile[k, l].wall;
+ 					switch (conversionType) {
+ 						case 4:
+-							if (type <= 624 && wall <= 316) {
++							if (type <= Main.maxTileSets && wall <= Main.maxWallTypes) {
+ 								if (WallID.Sets.Conversion.Grass[wall] && wall != 81) {
+ 									Main.tile[k, l].wall = 81;
+ 									SquareWallFrame(k, l);
+@@ -34432,7 +_,7 @@
+ 							}
+ 							continue;
+ 						case 2:
+-							if (type > 624 || wall > 316)
++							if (type > Main.maxTileSets || wall > Main.maxWallTypes)
+ 								continue;
+ 							if (WallID.Sets.Conversion.Grass[wall] && wall != 70) {
+ 								Main.tile[k, l].wall = 70;
+@@ -34521,7 +_,7 @@
+ 							}
+ 							continue;
+ 						case 1:
+-							if (type <= 624 && wall <= 316) {
++							if (type <= Main.maxTileSets && wall <= Main.maxWallTypes) {
+ 								if (WallID.Sets.Conversion.Grass[wall] && wall != 69) {
+ 									Main.tile[k, l].wall = 69;
+ 									SquareWallFrame(k, l);
+@@ -36773,7 +_,7 @@
+ 			if (gen && Main.tile[i, j].active() && Main.tile[i, j].type == 488)
+ 				return false;
+ 
+-			if (num >= 624)
++			if (num >= Main.maxTileSets)
+ 				return false;
+ 
+ 			bool result = false;
+@@ -37529,7 +_,7 @@
+ 			tile.wall = 0;
+ 			tile.wallColor(0);
+ 			SquareWallFrame(i, j);
+-			if (tile.type >= 0 && tile.type < 624 && TileID.Sets.FramesOnKillWall[tile.type])
++			if (tile.type >= 0 && tile.type < Main.maxTileSets && TileID.Sets.FramesOnKillWall[tile.type])
+ 				TileFrame(i, j);
+ 		}
+ 
+@@ -38964,7 +_,7 @@
+ 		}
+ 
+ 		public static bool ReplaceWall(int x, int y, ushort targetWall) {
+-			if (targetWall >= 316)
++			if (targetWall >= Main.maxWallTypes)
+ 				return false;
+ 
+ 			Tile tile = Main.tile[x, y];
+@@ -39098,7 +_,7 @@
+ 
+ 		public static bool WouldTileReplacementWork(ushort attemptingToReplaceWith, int x, int y) {
+ 			Tile tile = Main.tile[x, y];
+-			if (attemptingToReplaceWith >= 624)
++			if (attemptingToReplaceWith >= Main.maxTileSets)
+ 				return false;
+ 
+ 			if (TileID.Sets.Conversion.Grass[attemptingToReplaceWith])
+@@ -42994,7 +_,7 @@
+ 			}
+ 
+ 			if (tileCache.type == 186)
+-				num = ((tileCache.frameX <= 360) ? 26 : ((tileCache.frameX <= 846) ? 1 : ((tileCache.frameX <= 954) ? 9 : ((tileCache.frameX <= 1062) ? 11 : ((tileCache.frameX <= 1170) ? 10 : ((tileCache.frameX > 1332) ? ((tileCache.frameX > 1386) ? 80 : 10) : 0))))));
++				num = ((tileCache.frameX <= 360) ? 26 : ((tileCache.frameX <= 846) ? 1 : ((tileCache.frameX <= Main.maxProjectileTypes) ? 9 : ((tileCache.frameX <= 1062) ? 11 : ((tileCache.frameX <= 1170) ? 10 : ((tileCache.frameX > 1332) ? ((tileCache.frameX > 1386) ? 80 : 10) : 0))))));
+ 
+ 			if (tileCache.type == 187) {
+ 				if (tileCache.frameX <= 144)

@@ -1,0 +1,29 @@
+--- src/Terraria/Terraria/MessageBuffer.cs
++++ src/Avalon/Terraria/MessageBuffer.cs
+@@ -1154,7 +_,7 @@
+ 							Item item2 = Main.item[num77];
+ 							ItemSyncPersistentStats itemSyncPersistentStats = default(ItemSyncPersistentStats);
+ 							itemSyncPersistentStats.CopyFrom(item2);
+-							bool newAndShiny = (item2.newAndShiny || item2.netID != num76) && ItemSlot.Options.HighlightNewItems && (num76 < 0 || num76 >= 5088 || !ItemID.Sets.NeverAppearsAsNewInInventory[num76]);
++							bool newAndShiny = (item2.newAndShiny || item2.netID != num76) && ItemSlot.Options.HighlightNewItems && (num76 < 0 || num76 >= Main.maxItemTypes || !ItemID.Sets.NeverAppearsAsNewInInventory[num76]);
+ 							item2.netDefaults(num76);
+ 							item2.newAndShiny = newAndShiny;
+ 							item2.Prefix(pre2);
+@@ -1332,7 +_,7 @@
+ 						if (num88 == 245)
+ 							NPC.golemBoss = num85;
+ 
+-						if (nPC4.type >= 0 && nPC4.type < 665 && Main.npcCatchable[nPC4.type])
++						if (nPC4.type >= 0 && nPC4.type < Main.maxNPCTypes && Main.npcCatchable[nPC4.type])
+ 							nPC4.releaseOwner = reader.ReadByte();
+ 
+ 						break;
+@@ -2182,7 +_,7 @@
+ 						if (Main.netMode != 2)
+ 							break;
+ 
+-						if (num169 >= 0 && num169 < 665 && NPCID.Sets.MPAllowedEnemies[num169]) {
++						if (num169 >= 0 && num169 < Main.maxNPCTypes && NPCID.Sets.MPAllowedEnemies[num169]) {
+ 							if (!NPC.AnyNPCs(num169))
+ 								NPC.SpawnOnPlayer(plr, num169);
+ 						}

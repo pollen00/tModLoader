@@ -1,0 +1,110 @@
+--- src/Terraria/Terraria/NPC.cs
++++ src/Avalon/Terraria/NPC.cs
+@@ -43,7 +_,7 @@
+ 		public static int maxAI = 4;
+ 		public int netSpam;
+ 		public static int goldCritterChance = 400;
+-		public static int[] killCount = new int[665];
++		public static int[] killCount = new int[Main.maxNPCTypes];
+ 		public static float waveKills = 0f;
+ 		public static int waveNumber = 0;
+ 		public const float nameOverIncrement = 0.025f;
+@@ -110,7 +_,7 @@
+ 		public const int maxBuffs = 5;
+ 		public int[] buffType = new int[5];
+ 		public int[] buffTime = new int[5];
+-		public bool[] buffImmune = new bool[327];
++		public bool[] buffImmune = new bool[Main.maxBuffTypes];
+ 		public bool midas;
+ 		public bool ichor;
+ 		public bool onFire;
+@@ -200,7 +_,7 @@
+ 		public static bool downedMechBoss1 = false;
+ 		public static bool downedMechBoss2 = false;
+ 		public static bool downedMechBoss3 = false;
+-		public static bool[] npcsFoundForCheckActive = new bool[665];
++		public static bool[] npcsFoundForCheckActive = new bool[Main.maxNPCTypes];
+ 		public static int[] lazyNPCOwnedProjectileSearchArray = new int[200];
+ 		private static int spawnRate = defaultSpawnRate;
+ 		private static int maxSpawns = defaultMaxSpawns;
+@@ -653,7 +_,7 @@
+ 		public static void UpdateFoundActiveNPCs() {
+ 			for (int i = 0; i < 200; i++) {
+ 				NPC nPC = Main.npc[i];
+-				if (nPC.active && nPC.type >= 0 && nPC.type < 665)
++				if (nPC.active && nPC.type >= 0 && nPC.type < Main.maxNPCTypes)
+ 					npcsFoundForCheckActive[nPC.type] = true;
+ 			}
+ 
+@@ -2846,7 +_,7 @@
+ 				buffType[k] = 0;
+ 			}
+ 
+-			for (int l = 0; l < 327; l++) {
++			for (int l = 0; l < Main.maxBuffTypes; l++) {
+ 				buffImmune[l] = false;
+ 			}
+ 
+@@ -37419,7 +_,7 @@
+ 					break;
+ 			}
+ 
+-			if (type >= 0 && type < 665 && NPCID.Sets.TownCritter[type] && target == 255) {
++			if (type >= 0 && type < Main.maxNPCTypes && NPCID.Sets.TownCritter[type] && target == 255) {
+ 				TargetClosest();
+ 				if (position.X < Main.player[target].position.X) {
+ 					base.direction = 1;
+@@ -56201,7 +_,7 @@
+ 		}
+ 
+ 		public static void ResetKillCount() {
+-			for (int i = 0; i < 665; i++) {
++			for (int i = 0; i < Main.maxNPCTypes; i++) {
+ 				killCount[i] = 0;
+ 			}
+ 		}
+@@ -56245,7 +_,7 @@
+ 		}
+ 
+ 		public void NPCLootOld() {
+-			if (Main.netMode == 1 || type >= 665)
++			if (Main.netMode == 1 || type >= Main.maxNPCTypes)
+ 				return;
+ 
+ 			bool flag = false;
+@@ -56305,7 +_,7 @@
+ 
+ 			if (type == 1 && ai[1] > 0f) {
+ 				int num3 = (int)ai[1];
+-				if (num3 > 0 && num3 < 5088) {
++				if (num3 > 0 && num3 < Main.maxItemTypes) {
+ 					int stackForSlimeItemDrop = GetStackForSlimeItemDrop(num3);
+ 					Item.NewItem((int)position.X, (int)position.Y, width, height, num3, stackForSlimeItemDrop);
+ 				}
+@@ -58779,7 +_,7 @@
+ 		}
+ 
+ 		public void NPCLoot() {
+-			if (Main.netMode == 1 || type >= 665)
++			if (Main.netMode == 1 || type >= Main.maxNPCTypes)
+ 				return;
+ 
+ 			Player closestPlayer = Main.player[Player.FindClosest(position, width, height)];
+@@ -59869,7 +_,7 @@
+ 				NetMessage.SendData(71, -1, -1, null, x, y, Type, Style);
+ 			}
+ 			else {
+-				if (Type < 0 || Type >= 665 || !Main.npcCatchable[Type] || !CanReleaseNPCs(who))
++				if (Type < 0 || Type >= Main.maxNPCTypes || !Main.npcCatchable[Type] || !CanReleaseNPCs(who))
+ 					return;
+ 
+ 				switch (Type) {
+@@ -70974,7 +_,7 @@
+ 		}
+ 
+ 		public void RequestBuffRemoval(int buffTypeToRemove) {
+-			if (buffTypeToRemove < 0 || buffTypeToRemove >= 327 || !BuffID.Sets.CanBeRemovedByNetMessage[buffTypeToRemove])
++			if (buffTypeToRemove < 0 || buffTypeToRemove >= Main.maxBuffTypes || !BuffID.Sets.CanBeRemovedByNetMessage[buffTypeToRemove])
+ 				return;
+ 
+ 			int num = FindBuffIndex(buffTypeToRemove);

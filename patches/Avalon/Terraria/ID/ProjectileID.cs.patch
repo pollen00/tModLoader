@@ -1,6 +1,6 @@
 --- src/Terraria/Terraria/ID/ProjectileID.cs
 +++ src/Avalon/Terraria/ID/ProjectileID.cs
-@@ -2,7 +_,7 @@
+@@ -2,11 +_,11 @@
  
  namespace Terraria.ID
  {
@@ -9,3 +9,15 @@
  	{
  		public static class Sets
  		{
+-			public static SetFactory Factory = new SetFactory(954);
++			public static SetFactory Factory = new SetFactory(Count);
+ 			public static bool[] DontApplyParryDamageBuff = Factory.CreateBoolSet(false, 524, 321, 181, 566);
+ 			public static bool[] IsAWhip = Factory.CreateBoolSet(false, 847, 841, 848, 849, 912, 913, 914, 915, 952);
+ 			public static bool[] ImmediatelyUpdatesNPCBuffFlags = Factory.CreateBoolSet(636);
+@@ -1214,6 +_,5 @@
+ 		public const short FlinxMinion = 951;
+ 		public const short BoneWhip = 952;
+ 		public const short DaybreakExplosion = 953;
+-		public const short Count = 954;
+ 	}
+ }

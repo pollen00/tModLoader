@@ -1,0 +1,20 @@
+--- src/Terraria/Terraria/NetMessage.cs
++++ src/Avalon/Terraria/NetMessage.cs
+@@ -581,7 +_,7 @@
+ 								}
+ 							}
+ 
+-							if (nPC2.type >= 0 && nPC2.type < 665 && Main.npcCatchable[nPC2.type])
++							if (nPC2.type >= 0 && nPC2.type < Main.maxNPCTypes && Main.npcCatchable[nPC2.type])
+ 								writer.Write((byte)nPC2.releaseOwner);
+ 
+ 							break;
+@@ -616,7 +_,7 @@
+ 							if (projectile.knockBack != 0f)
+ 								bb21[5] = true;
+ 
+-							if (projectile.type > 0 && projectile.type < 954 && ProjectileID.Sets.NeedsUUID[projectile.type])
++							if (projectile.type > 0 && projectile.type < Main.maxProjectileTypes && ProjectileID.Sets.NeedsUUID[projectile.type])
+ 								bb21[7] = true;
+ 
+ 							if (projectile.originalDamage != 0)
