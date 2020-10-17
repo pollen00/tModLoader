@@ -1,0 +1,19 @@
+--- src/Terraria/Terraria/ID/ItemID.cs
++++ src/Avalon/Terraria/ID/ItemID.cs
+@@ -5,7 +_,7 @@
+ 
+ namespace Terraria.ID
+ {
+-	public class ItemID
++	public partial class ItemID
+ 	{
+ 		public struct BannerEffect
+ 		{
+@@ -6074,7 +_,6 @@
+ 		public const short Princess64 = 5085;
+ 		public const short PaintingOfALass = 5086;
+ 		public const short DarkSideHallow = 5087;
+-		public const short Count = 5088;
+ 
+ 		private static Dictionary<string, short> GenerateLegacyItemDictionary() {
+ 			return new Dictionary<string, short> {

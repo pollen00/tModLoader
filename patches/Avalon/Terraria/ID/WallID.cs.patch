@@ -1,0 +1,17 @@
+--- src/Terraria/Terraria/ID/WallID.cs
++++ src/Avalon/Terraria/ID/WallID.cs
+@@ -1,6 +_,6 @@
+ namespace Terraria.ID
+ {
+-	public class WallID
++	public partial class WallID
+ 	{
+ 		public static class Sets
+ 		{
+@@ -342,6 +_,5 @@
+ 		public const ushort LargeBambooBlockWall = 313;
+ 		public const ushort AmberStoneWallEcho = 314;
+ 		public const ushort BambooFence = 315;
+-		public const ushort Count = 316;
+ 	}
+ }

@@ -1,0 +1,18 @@
+--- src/Terraria/Terraria/ID/BuffID.cs
++++ src/Avalon/Terraria/ID/BuffID.cs
+@@ -2,7 +_,7 @@
+ 
+ namespace Terraria.ID
+ {
+-	public class BuffID
++	public partial class BuffID
+ 	{
+ 		public class Sets
+ 		{
+@@ -599,6 +_,5 @@
+ 		public const int Frostburn2 = 324;
+ 		public const int FlinxMinion = 325;
+ 		public const int BoneWhipNPCDebuff = 326;
+-		public const int Count = 327;
+ 	}
+ }

@@ -1,0 +1,19 @@
+--- src/Terraria/Terraria/ID/NPCID.cs
++++ src/Avalon/Terraria/ID/NPCID.cs
+@@ -6,7 +_,7 @@
+ 
+ namespace Terraria.ID
+ {
+-	public class NPCID
++	public partial class NPCID
+ 	{
+ 		public static class Sets
+ 		{
+@@ -8612,7 +_,6 @@
+ 		public const short PirateGhost = 662;
+ 		public const short Princess = 663;
+ 		public const short TorchGod = 664;
+-		public const short Count = 665;
+ 
+ 		public static int FromLegacyName(string name) {
+ 			if (LegacyNameToIdMap.TryGetValue(name, out int value))
