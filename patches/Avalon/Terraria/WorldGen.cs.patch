@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/WorldGen.cs
 +++ src/Avalon/Terraria/WorldGen.cs
+@@ -27,7 +_,7 @@
+ 
+ namespace Terraria
+ {
+-	public class WorldGen
++	public partial class WorldGen
+ 	{
+ 		public static class SavedOreTiers
+ 		{
 @@ -698,7 +_,7 @@
  		public static ushort mossTile = 179;
  		public static ushort mossWall = 54;
