@@ -1,0 +1,10 @@
+--- src/Terraria/Terraria/ID/AmmoID.cs
++++ src/Avalon/Terraria/ID/AmmoID.cs
+@@ -260,6 +_,7 @@
+ 		}
+ 
+ 		public static int None = 0;
++		public static int Torch = 8;
+ 		public static int Gel = 23;
+ 		public static int Arrow = 40;
+ 		public static int Coin = 71;

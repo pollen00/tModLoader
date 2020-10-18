@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/Item.cs
 +++ src/Avalon/Terraria/Item.cs
+@@ -13,7 +_,7 @@
+ 
+ namespace Terraria
+ {
+-	public class Item : Entity
++	public partial class Item : Entity
+ 	{
+ 		private string _nameOverride;
+ 		public const int luckPotionDuration1 = 10800;
 @@ -40,8 +_,8 @@
  		public static int[] headType = new int[273];
  		public static int[] bodyType = new int[244];
@@ -11,6 +20,323 @@
  		public bool flame;
  		public bool mech;
  		public int noGrabDelay;
+@@ -158,7 +_,7 @@
+ 		public const int WALL_PLACEMENT_USETIME = 7;
+ 		public static int numberOfNewItems = 0;
+ 
+-		public string Name => _nameOverride ?? Lang.GetItemNameValue(type);
++		public string Name => string.IsNullOrWhiteSpace(name) ? (_nameOverride ?? Lang.GetItemNameValue(type)) : name;
+ 
+ 		public string HoverName {
+ 			get {
+@@ -1016,6 +_,101 @@
+ 						num2 = 1.05f;
+ 						num8 = 2;
+ 						break;
++					case 91:
++						num3 = 1.2f;
++						num2 = 1.2f;
++						num8 = 6;
++						num6 = 1.13f;
++						num4 = 0.85f;
++						break;
++					case 92:
++						num3 = 1.2f;
++						num2 = 1.19f;
++						num8 = 6;
++						num5 = 1.13f;
++						num4 = 0.85f;
++						break;
++					case 93:
++						num3 = 1.2f;
++						num2 = 1.19f;
++						num8 = 6;
++						num7 = 0.85f;
++						num4 = 0.85f;
++						break;
++					case 108:
++						num6 = 1.05f;
++						break;
++					case 109:
++						num2 = 1.25f;
++						num3 = 0.93f;
++						num5 = 1.3f;
++						num8 = -2;
++						num4 = 1.1f;
++						break;
++					case 110:
++						num2 = 1.19f;
++						num7 = 0.8f;
++						break;
++					case 111:
++						num2 = 1.07f;
++						num3 = 0.9f;
++						num7 = 1.1f;
++						break;
++					case 112:
++						num2 = 1.1f;
++						break;
++					case 113:
++						num2 = 0.95f;
++						num3 = 0.93f;
++						num4 = 0.83f;
++						num8 = -1;
++						num7 = 1.03f;
++						break;
++					case 114:
++						num2 = 0.9f;
++						num3 = 1.1f;
++						num6 = 0.9f;
++						num8 = -3;
++						break;
++					case 115:
++						num2 = 1.14f;
++						num4 = 1.03f;
++						break;
++					case 116:
++						num2 = 1.15f;
++						break;
++					case 117:
++						num2 = 1.18f;
++						num8 = 7;
++						num4 = 0.8f;
++						break;
++					case 118:
++						num2 = 0.7f;
++						num3 = 1.16f;
++						num5 = 1.25f;
++						num4 = 1.05f;
++						break;
++					case 119:
++						num2 = 1.05f;
++						num4 = 1.12f;
++						num6 = 0.93f;
++						break;
++					case 120:
++						num2 = 0.6f;
++						break;
++					case 122:
++						num5 = 1.5f;
++						break;
++					case 127:
++						num3 = 1.07f;
++						num2 = 1.13f;
++						crit = 3;
++						break;
++					case 128:
++						num3 = 0.93f;
++						num2 = 0.87f;
++						crit = -3;
++						break;
+ 				}
+ 
+ 				if (num2 != 1f && Math.Round((float)damage * num2) == (double)damage) {
+@@ -1038,7 +_,7 @@
+ 					num = -1;
+ 				}
+ 
+-				if (pre == -2 && num == 0) {
++				if (pre == -2 && num == 0 && !IsArmor()) {
+ 					num = -1;
+ 					flag = true;
+ 				}
+@@ -1054,18 +_,24 @@
+ 			shootSpeed *= num6;
+ 			crit += num8;
+ 			float num14 = 1f * num2 * (2f - num4) * (2f - num7) * num5 * num3 * num6 * (1f + (float)num8 * 0.02f);
+-			if (num == 62 || num == 69 || num == 73 || num == 77)
++			if (num2 == 96 || num2 == 98 || num2 == 100 || num2 == 109 || num2 == 114 || num2 == 118 || num2 == 119) {
++				num14 /= 1.1f;
++			}
++			if (num == 62 || num == 69 || num == 73 || num == 77 || num2 == 108 || num2 == 111 || num2 == 112 || num2 == 113)
+ 				num14 *= 1.05f;
+ 
+-			if (num == 63 || num == 70 || num == 74 || num == 78 || num == 67)
++			if (num == 63 || num == 70 || num == 74 || num == 78 || num == 67 || num == 102 || num == 103 || num == 116)
+ 				num14 *= 1.1f;
+ 
+-			if (num == 64 || num == 71 || num == 75 || num == 79 || num == 66)
++			if (num == 64 || num == 71 || num == 75 || num == 79 || num == 66 || num == 94 || num == 97 || num == 99)
+ 				num14 *= 1.15f;
+ 
+-			if (num == 65 || num == 72 || num == 76 || num == 80 || num == 68)
++			if (num == 65 || num == 72 || num == 76 || num == 80 || num == 68 || num == 105 || num == 106 || num == 107)
+ 				num14 *= 1.2f;
+ 
++			if ((num >= 85 && num <= 90) || num == 95 || num == 101 || num == 104 || num == 110 || num == 115 || num == 117)
++				num14 *= 1.25f;
++
+ 			if ((double)num14 >= 1.2)
+ 				rare += 2;
+ 			else if ((double)num14 >= 1.05)
+@@ -3516,7 +_,14 @@
+ 				case 68:
+ 					width = 18;
+ 					height = 20;
++					useStyle = 1;
++					useAnimation = 15;
++					useTime = 10;
++					consumable = true;
++					useTurn = true;
++					autoReuse = true;
++					createTile = TileID.RottenChunk;
+-					maxStack = 99;
++					maxStack = 999;
+ 					value = 10;
+ 					break;
+ 				case 69:
+@@ -3717,6 +_,13 @@
+ 					tileBoost += 3;
+ 					break;
+ 				case 86:
++					useTurn = true;
++					useStyle = 1;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
++					consumable = true;
++					createTile = TileID.ShadowScale;
+ 					width = 14;
+ 					height = 18;
+ 					maxStack = 999;
+@@ -9104,14 +_,30 @@
+ 				case 520:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.LightsoulBlock;
++					noUseGraphic = true;
+ 					value = 1000;
+ 					rare = 3;
+ 					break;
+ 				case 521:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.NightsoulBlock;
++					noUseGraphic = true;
+ 					value = 1000;
+ 					rare = 3;
+ 					break;
+@@ -9423,21 +_,45 @@
+ 				case 547:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.FrightsoulBlock;
++					noUseGraphic = true;
+ 					value = 40000;
+ 					rare = 5;
+ 					break;
+ 				case 548:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.MightsoulBlock;
++					noUseGraphic = true;
+ 					value = 40000;
+ 					rare = 5;
+ 					break;
+ 				case 549:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.SightsoulBlock;
++					noUseGraphic = true;
+ 					value = 40000;
+ 					rare = 5;
+ 					break;
+@@ -9775,7 +_,15 @@
+ 				case 575:
+ 					width = 18;
+ 					height = 18;
++					useStyle = 1;
++					useTurn = true;
++					useAnimation = 15;
++					useTime = 10;
++					autoReuse = true;
+ 					maxStack = 999;
++					consumable = true;
++					createTile = TileID.FlightsoulBlock;
++					noUseGraphic = true;
+ 					value = 1000;
+ 					rare = 3;
+ 					break;
+@@ -14781,6 +_,8 @@
+ 					ranged = true;
+ 					break;
+ 			}
++
++			SetItemIDsWIthOffset(type);
+ 		}
+ 
+ 		public void SetDefaults2(int type) {
+@@ -18450,7 +_,14 @@
+ 				case 1330:
+ 					width = 18;
+ 					height = 20;
++					useStyle = 1;
++					useAnimation = 15;
++					useTime = 10;
++					consumable = true;
++					useTurn = true;
++					autoReuse = true;
++					createTile = TileID.Vertebrae;
+-					maxStack = 99;
++					maxStack = 999;
+ 					value = 12;
+ 					return;
+ 				case 1331:
+@@ -20548,10 +_,17 @@
+ 					tileBoost += 3;
+ 					return;
+ 				case 1508:
++					useStyle = 1;
++					useAnimation = 15;
++					useTime = 10;
++					consumable = true;
++					useTurn = true;
++					autoReuse = true;
++					createTile = TileID.Ectoplasm;
+-					maxStack = 99;
++					maxStack = 999;
+ 					width = 16;
+ 					height = 14;
+-					value = sellPrice(0, 0, 50);
++					value = Item.sellPrice(0, 0, 50);
+ 					rare = 8;
+ 					return;
+ 				case 1509:
 @@ -44701,7 +_,7 @@
  				playerIndexTheItemIsReservedFor = Main.myPlayer;
  
@@ -29,6 +355,24 @@
  				netID = 0;
  				type = 0;
  				stack = 0;
+@@ -44888,6 +_,17 @@
+ 		}
+ 
+ 		public void ResetStats(int Type) {
++			projFireDelay = 0;
++			gemWand = false;
++			worksInVanity = false;
++			tome = false;
++			invince = false;
++			torch = 0;
++			wallWand = -1;
++			healStamina = 0;
++			name = "";
++			toolTip = "";
++			toolTip2 = "";
+ 			tooltipContext = -1;
+ 			BestiaryNotes = null;
+ 			sentry = false;
 @@ -46184,7 +_,7 @@
  				Prefix(reader.ReadByte());
  			}
