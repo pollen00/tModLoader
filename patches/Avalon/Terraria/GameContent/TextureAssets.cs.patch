@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/GameContent/TextureAssets.cs
 +++ src/Avalon/Terraria/GameContent/TextureAssets.cs
+@@ -3,7 +_,7 @@
+ 
+ namespace Terraria.GameContent
+ {
+-	public static class TextureAssets
++	public static partial class TextureAssets
+ 	{
+ 		public static class RenderTargets
+ 		{
 @@ -177,17 +_,17 @@
  		public static Asset<Texture2D>[] NpcToggle = new Asset<Texture2D>[2];
  		public static Asset<Texture2D>[] HbLock = new Asset<Texture2D>[2];

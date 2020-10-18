@@ -1,5 +1,14 @@
 --- src/Terraria/Terraria/Initializers/AssetInitializer.cs
 +++ src/Avalon/Terraria/Initializers/AssetInitializer.cs
+@@ -18,7 +_,7 @@
+ 
+ namespace Terraria.Initializers
+ {
+-	public static class AssetInitializer
++	public static partial class AssetInitializer
+ 	{
+ 		public static void CreateAssetServices(GameServiceContainer services) {
+ 			AssetReaderCollection assetReaderCollection = new AssetReaderCollection();
 @@ -370,7 +_,7 @@
  				TextureAssets.BackPack[num48] = LoadAsset<Texture2D>("Images\\BackPack_" + num48, mode);
  			}
@@ -8,4 +17,12 @@
 +			for (int num49 = 1; num49 < Main.maxBuffTypes; num49++) {
  				TextureAssets.Buff[num49] = LoadAsset<Texture2D>("Images\\Buff_" + num49, mode);
  			}
+ 
+@@ -590,6 +_,7 @@
+ 			TextureAssets.GolfBallOutline = LoadAsset<Texture2D>("Images\\Misc\\GolfBallOutline", mode);
+ 			LoadMinimapFrames(mode);
+ 			LoadPlayerResourceSets(mode);
++			LoadAvalonTextures(mode);
+ 			Main.AchievementAdvisor.LoadContent();
+ 		}
  
