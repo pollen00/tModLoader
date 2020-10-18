@@ -10,7 +10,7 @@
 		public int liquidAmount;
 		public int wire;
 
-		public TileInfo(int tileID, int tileStyle, int tileSlope, int wallID, int liquidType, int liquidAmount, int wire) {
+		public TileInfo(int tileID, int tileStyle, int tileSlope = -2, int wallID = -1, int liquidType = -1, int liquidAmount = 0, int wire = -1) {
 			this.tileID = tileID;
 			this.tileStyle = tileStyle;
 			this.tileSlope = tileSlope;
