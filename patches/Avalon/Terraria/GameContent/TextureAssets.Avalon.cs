@@ -5,8 +5,8 @@ namespace Terraria.GameContent
 {
 	partial class TextureAssets
 	{
-        public static Asset<Texture2D> Lightning1;
-        public static Asset<Texture2D> Lightning2;
+		public static Asset<Texture2D> Lightning1;
+		public static Asset<Texture2D> Lightning2;
 		public static Asset<Texture2D> AvalonChain39;
 		public static Asset<Texture2D> AvalonChain40;
 		public static Asset<Texture2D> AvalonChain41;
